@@ -44,3 +44,4 @@ class MainWindow(QWidget):
 
     def sectionItems(self,item):
         self.ui.sectionlist.addItem(item)
+        
