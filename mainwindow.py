@@ -87,6 +87,6 @@ class MainWindow(QWidget):
     def clickedAllSections(self):
         tax = self.ui.taxList.currentIndex()
         jsonSection.slot_changeTaxAllSections(jsonSection,datos,tax)
-        
-    
+
+
 
