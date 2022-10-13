@@ -31,6 +31,7 @@ class MainWindow(QWidget):
         self.ui.taxImpIt.clicked.connect(self.clickedItemImp)
         self.ui.removeTax.clicked.connect(self.clickedRemoveTax)
 
+
     def abrirArchivo(self):
         archivo = QFileDialog.getOpenFileName(self, ("Open Json"), "C:\\", "Text files(*.txt);;Archivo JSON(.json)")
         print(archivo)
@@ -52,21 +53,24 @@ class MainWindow(QWidget):
 
     def clickedLoad(self):
         self.update()
-        archivo = QFileDialog.getOpenFileName(self, ("Open Json"), "C:\\Users\laral\Downloads", ("JSON File (*.json)"))
+        archivo = QFileDialog.getOpenFileName(self, ("Open Json"), "C:\\", ("JSON File (*.json)"))
         archivoSeparado = archivo[0].split(sep=',')
         global file
         file1 = "".join(archivoSeparado)
         file1.replace("'","")
         global datos
         datos = dict()
+        self.ui.itemList.clear()
+        self.ui.itemSearch.clear()
         if file1 ==  '':
+            self.ui.taxList.clear()
+            self.ui.sectionList.clear()
             pass
         else:
             file = file1
             datos = jsonSection.openJson(jsonSection,file)
-        self.setTaxList()
-        self.setSectionList()
-        self.ui.itemList.setText("")
+            self.setTaxList()
+            self.setSectionList()
 
     def closeEvent(self, event):
         reply = QMessageBox.question(self, 'Window Close', 'Are you sure you want to close the window?',
@@ -102,28 +106,28 @@ class MainWindow(QWidget):
         tax = self.ui.taxList.currentIndex()
         jsonSection.slot_changeTaxSelectedSections(jsonSection,datos,section,tax)
         reply = QMessageBox.information(self, 'Success!',
-        'The selected sections have been updated',QMessageBox.Ok,)
+        'The selected sections have been updated',QMessageBox.Ok)
 
     def clickedAllSections(self):
         tax = self.ui.taxList.currentIndex()
         jsonSection.slot_changeTaxAllSections(jsonSection,datos,tax)
         reply = QMessageBox.information(self, 'Success!',
-        'All the items have been updated',QMessageBox.Ok,)
+        'All the items have been updated',QMessageBox.Ok)
 
     def clickedItemImp(self):
         tax = self.ui.taxList.currentIndex()
         jsonSection.slot_changeTaxSelectedItems(jsonSection,datos,item,tax)
         reply = QMessageBox.information(self, 'Success!',
-        'The selected items have been updated',QMessageBox.Ok,)
+        'The selected items have been updated',QMessageBox.Ok)
 
     def clickedRemoveTax(self):
         tax = None
         jsonSection.slot_RemoveTaxAllItems(jsonSection,datos,tax)
         reply = QMessageBox.information(self, 'Success!',
-        'All taxes have been removed from your Menu',QMessageBox.Ok,)
+        'All taxes have been removed from your Menu',QMessageBox.Ok)
 
 
     def clickedSave(self):
         jsonSection.save_json(jsonSection,datos,file)
         reply = QMessageBox.information(self, 'Success!',
-        'Json Succesfully Saved!',QMessageBox.Ok,)
+        'Json Succesfully Saved!',QMessageBox.Ok)
