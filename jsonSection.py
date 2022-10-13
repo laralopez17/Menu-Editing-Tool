@@ -52,7 +52,6 @@ class jsonSection:
                     for i in range(0,len(datos["MenuSections"])):
                         for k in range(0,len(datos["MenuSections"][i]["MenuItems"])):
                             item = datos["MenuSections"][i]["MenuItems"][k]['Name']
-                            print(item, itemSelected[j])
                             if item.lower() == itemSelected[j].lower():
                                 datos["MenuSections"][i]["MenuItems"][k]['TaxRateId'] = newTaxRateId
                                 for l in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"])):
