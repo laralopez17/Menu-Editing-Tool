@@ -1,4 +1,4 @@
-﻿import json
+import json
 
 class jsonSection:
     def __init__(self):
@@ -50,16 +50,15 @@ class jsonSection:
                 newTaxRateId = datos['TaxRates'][i]['TaxRateId']
                 for j in range(0,len(itemSelected)):
                     for i in range(0,len(datos["MenuSections"])):
-                            for k in range(0,len(datos["MenuSections"][i]["MenuItems"])):
-                                for item in datos["MenuSections"][i]["MenuItems"]:
-                                    items = datos["MenuSections"][i]["MenuItems"][k]["Name"]
-                                    if items.lower() == itemSelected[j].lower():
-                                        item['TaxRateId'] = newTaxRateId
-                                        for l in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"])):
-
-                                            for os in datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"]:
-                                                for osi in datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems']:
-                                                    osi['TaxRateId'] = newTaxRateId
+                        for k in range(0,len(datos["MenuSections"][i]["MenuItems"])):
+                            item = datos["MenuSections"][i]["MenuItems"][k]['Name']
+                            print(item, itemSelected[j])
+                            if item.lower() == itemSelected[j].lower():
+                                datos["MenuSections"][i]["MenuItems"][k]['TaxRateId'] = newTaxRateId
+                                for l in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"])):
+                                    for os in datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"]:
+                                        for osi in datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems']:
+                                            osi['TaxRateId'] = newTaxRateId
 
 
     #changes the taxes for all sections (only items for now)
