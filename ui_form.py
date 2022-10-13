@@ -11,131 +11,136 @@
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QGridLayout, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QSpacerItem,
+    QLineEdit, QMainWindow, QMenu, QMenuBar,
+    QPushButton, QSizePolicy, QSpacerItem, QStatusBar,
     QTextEdit, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(850, 506)
-        MainWindow.setMouseTracking(False)
-        MainWindow.setTabletTracking(False)
-        MainWindow.setContextMenuPolicy(Qt.DefaultContextMenu)
-        MainWindow.setAcceptDrops(True)
+        MainWindow.resize(772, 451)
+        font = QFont()
+        font.setFamilies([u"Yu Gothic"])
+        font.setPointSize(10)
+        MainWindow.setFont(font)
+        MainWindow.setAutoFillBackground(False)
         MainWindow.setStyleSheet(u"")
-        MainWindow.setInputMethodHints(Qt.ImhNone)
-        self.gridLayout = QGridLayout(MainWindow)
+        self.actionLoad_Json = QAction(MainWindow)
+        self.actionLoad_Json.setObjectName(u"actionLoad_Json")
+        icon = QIcon()
+        icon.addFile(u"images/loadJson.ico", QSize(), QIcon.Normal, QIcon.Off)
+        self.actionLoad_Json.setIcon(icon)
+        self.actionSave_Json = QAction(MainWindow)
+        self.actionSave_Json.setObjectName(u"actionSave_Json")
+        icon1 = QIcon()
+        icon1.addFile(u"images/saveJson.ico", QSize(), QIcon.Normal, QIcon.Off)
+        self.actionSave_Json.setIcon(icon1)
+        self.actionExit = QAction(MainWindow)
+        self.actionExit.setObjectName(u"actionExit")
+        icon2 = QIcon()
+        icon2.addFile(u"images/exit.ico", QSize(), QIcon.Normal, QIcon.Off)
+        self.actionExit.setIcon(icon2)
+        self.actionApply_Tax_to_All_Sections = QAction(MainWindow)
+        self.actionApply_Tax_to_All_Sections.setObjectName(u"actionApply_Tax_to_All_Sections")
+        self.actionRemove_Tax_from_All_Sections = QAction(MainWindow)
+        self.actionRemove_Tax_from_All_Sections.setObjectName(u"actionRemove_Tax_from_All_Sections")
+        self.centralwidget = QWidget(MainWindow)
+        self.centralwidget.setObjectName(u"centralwidget")
+        self.gridLayout = QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.addSection = QPushButton(MainWindow)
+        self.addSection = QPushButton(self.centralwidget)
         self.addSection.setObjectName(u"addSection")
 
-        self.gridLayout.addWidget(self.addSection, 4, 4, 1, 1)
+        self.gridLayout.addWidget(self.addSection, 4, 2, 1, 1)
 
-        self.sectionList = QComboBox(MainWindow)
-        self.sectionList.setObjectName(u"sectionList")
-
-        self.gridLayout.addWidget(self.sectionList, 3, 4, 1, 1)
-
-        self.taxList = QComboBox(MainWindow)
-        self.taxList.setObjectName(u"taxList")
-        self.taxList.setEditable(False)
-
-        self.gridLayout.addWidget(self.taxList, 1, 4, 1, 1)
-
-        self.itemList = QTextEdit(MainWindow)
-        self.itemList.setObjectName(u"itemList")
-        self.itemList.setReadOnly(True)
-
-        self.gridLayout.addWidget(self.itemList, 5, 2, 1, 1)
-
-        self.labelSections = QLabel(MainWindow)
-        self.labelSections.setObjectName(u"labelSections")
-
-        self.gridLayout.addWidget(self.labelSections, 2, 4, 1, 1)
-
-        self.taxImpSec = QPushButton(MainWindow)
-        self.taxImpSec.setObjectName(u"taxImpSec")
-
-        self.gridLayout.addWidget(self.taxImpSec, 6, 4, 1, 1)
-
-        self.allSections = QPushButton(MainWindow)
-        self.allSections.setObjectName(u"allSections")
-
-        self.gridLayout.addWidget(self.allSections, 7, 2, 1, 1)
-
-        self.itemSearch = QLineEdit(MainWindow)
-        self.itemSearch.setObjectName(u"itemSearch")
-
-        self.gridLayout.addWidget(self.itemSearch, 3, 2, 1, 1)
-
-        self.loadJson = QPushButton(MainWindow)
-        self.loadJson.setObjectName(u"loadJson")
-
-        self.gridLayout.addWidget(self.loadJson, 0, 0, 1, 1)
-
-        self.labelItems = QLabel(MainWindow)
-        self.labelItems.setObjectName(u"labelItems")
-
-        self.gridLayout.addWidget(self.labelItems, 2, 2, 1, 1)
-
-        self.pbExit = QPushButton(MainWindow)
-        self.pbExit.setObjectName(u"pbExit")
-        self.pbExit.setMinimumSize(QSize(281, 35))
-
-        self.gridLayout.addWidget(self.pbExit, 7, 4, 1, 1)
-
-        self.labelTax = QLabel(MainWindow)
-        self.labelTax.setObjectName(u"labelTax")
-        self.labelTax.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout.addWidget(self.labelTax, 0, 4, 1, 1)
-
-        self.addedSections = QTextEdit(MainWindow)
+        self.addedSections = QTextEdit(self.centralwidget)
         self.addedSections.setObjectName(u"addedSections")
-        self.addedSections.setReadOnly(True)
 
-        self.gridLayout.addWidget(self.addedSections, 5, 4, 1, 1)
-
-        self.taxImpIt = QPushButton(MainWindow)
-        self.taxImpIt.setObjectName(u"taxImpIt")
-
-        self.gridLayout.addWidget(self.taxImpIt, 6, 2, 1, 1)
+        self.gridLayout.addWidget(self.addedSections, 7, 2, 1, 1)
 
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout.addItem(self.horizontalSpacer, 7, 3, 1, 1)
+        self.gridLayout.addItem(self.horizontalSpacer, 7, 0, 1, 1)
 
-        self.saveJson = QPushButton(MainWindow)
-        self.saveJson.setObjectName(u"saveJson")
+        self.itemSearch = QLineEdit(self.centralwidget)
+        self.itemSearch.setObjectName(u"itemSearch")
 
-        self.gridLayout.addWidget(self.saveJson, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.itemSearch, 4, 1, 1, 1)
 
-        self.removeTax = QPushButton(MainWindow)
-        self.removeTax.setObjectName(u"removeTax")
+        self.taxImpIt = QPushButton(self.centralwidget)
+        self.taxImpIt.setObjectName(u"taxImpIt")
 
-        self.gridLayout.addWidget(self.removeTax, 7, 0, 1, 1)
+        self.gridLayout.addWidget(self.taxImpIt, 11, 1, 1, 1)
 
-        self.jsonName = QLabel(MainWindow)
-        self.jsonName.setObjectName(u"jsonName")
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
-        self.gridLayout.addWidget(self.jsonName, 0, 2, 1, 1)
+        self.gridLayout.addItem(self.verticalSpacer_2, 2, 1, 1, 1)
 
-        QWidget.setTabOrder(self.loadJson, self.taxList)
-        QWidget.setTabOrder(self.taxList, self.itemSearch)
-        QWidget.setTabOrder(self.itemSearch, self.sectionList)
-        QWidget.setTabOrder(self.sectionList, self.addSection)
-        QWidget.setTabOrder(self.addSection, self.taxImpIt)
-        QWidget.setTabOrder(self.taxImpIt, self.taxImpSec)
-        QWidget.setTabOrder(self.taxImpSec, self.allSections)
-        QWidget.setTabOrder(self.allSections, self.pbExit)
-        QWidget.setTabOrder(self.pbExit, self.itemList)
-        QWidget.setTabOrder(self.itemList, self.addedSections)
+        self.label = QLabel(self.centralwidget)
+        self.label.setObjectName(u"label")
+        self.label.setFont(font)
+
+        self.gridLayout.addWidget(self.label, 3, 1, 1, 1, Qt.AlignHCenter)
+
+        self.itemList = QTextEdit(self.centralwidget)
+        self.itemList.setObjectName(u"itemList")
+
+        self.gridLayout.addWidget(self.itemList, 7, 1, 1, 1)
+
+        self.sectionList = QComboBox(self.centralwidget)
+        self.sectionList.setObjectName(u"sectionList")
+
+        self.gridLayout.addWidget(self.sectionList, 3, 2, 1, 1)
+
+        self.taxImpSec = QPushButton(self.centralwidget)
+        self.taxImpSec.setObjectName(u"taxImpSec")
+
+        self.gridLayout.addWidget(self.taxImpSec, 11, 2, 1, 1)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.gridLayout.addItem(self.verticalSpacer, 8, 0, 1, 1)
+
+        self.taxList = QComboBox(self.centralwidget)
+        self.taxList.setObjectName(u"taxList")
+
+        self.gridLayout.addWidget(self.taxList, 4, 0, 1, 1)
+
+        self.labelTax = QLabel(self.centralwidget)
+        self.labelTax.setObjectName(u"labelTax")
+
+        self.gridLayout.addWidget(self.labelTax, 3, 0, 1, 1)
+
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QMenuBar(MainWindow)
+        self.menubar.setObjectName(u"menubar")
+        self.menubar.setGeometry(QRect(0, 0, 772, 29))
+        self.menuFile = QMenu(self.menubar)
+        self.menuFile.setObjectName(u"menuFile")
+        self.menuEdit = QMenu(self.menubar)
+        self.menuEdit.setObjectName(u"menuEdit")
+        self.menuTax_Options = QMenu(self.menuEdit)
+        self.menuTax_Options.setObjectName(u"menuTax_Options")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QStatusBar(MainWindow)
+        self.statusbar.setObjectName(u"statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+
+        self.menubar.addAction(self.menuFile.menuAction())
+        self.menubar.addAction(self.menuEdit.menuAction())
+        self.menuFile.addAction(self.actionLoad_Json)
+        self.menuFile.addAction(self.actionSave_Json)
+        self.menuFile.addAction(self.actionExit)
+        self.menuEdit.addAction(self.menuTax_Options.menuAction())
+        self.menuTax_Options.addAction(self.actionApply_Tax_to_All_Sections)
+        self.menuTax_Options.addAction(self.actionRemove_Tax_from_All_Sections)
 
         self.retranslateUi(MainWindow)
 
@@ -144,22 +149,33 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-#if QT_CONFIG(tooltip)
-        MainWindow.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><br/></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
+        self.actionLoad_Json.setText(QCoreApplication.translate("MainWindow", u"Load Json", None))
+#if QT_CONFIG(shortcut)
+        self.actionLoad_Json.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+A", None))
+#endif // QT_CONFIG(shortcut)
+        self.actionSave_Json.setText(QCoreApplication.translate("MainWindow", u"Save Json", None))
+#if QT_CONFIG(shortcut)
+        self.actionSave_Json.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+S", None))
+#endif // QT_CONFIG(shortcut)
+        self.actionExit.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
+#if QT_CONFIG(shortcut)
+        self.actionExit.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+Q", None))
+#endif // QT_CONFIG(shortcut)
+        self.actionApply_Tax_to_All_Sections.setText(QCoreApplication.translate("MainWindow", u"Apply Tax to All Sections", None))
+#if QT_CONFIG(shortcut)
+        self.actionApply_Tax_to_All_Sections.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+T", None))
+#endif // QT_CONFIG(shortcut)
+        self.actionRemove_Tax_from_All_Sections.setText(QCoreApplication.translate("MainWindow", u"Remove Tax from All Sections", None))
+#if QT_CONFIG(shortcut)
+        self.actionRemove_Tax_from_All_Sections.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+R", None))
+#endif // QT_CONFIG(shortcut)
         self.addSection.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.taxList.setCurrentText("")
-        self.labelSections.setText(QCoreApplication.translate("MainWindow", u"Please select the sections to modify", None))
-        self.taxImpSec.setText(QCoreApplication.translate("MainWindow", u"Implement Sections Tax", None))
-        self.allSections.setText(QCoreApplication.translate("MainWindow", u"Change Tax to All Sections", None))
-        self.itemSearch.setText("")
-        self.loadJson.setText(QCoreApplication.translate("MainWindow", u"Load Json", None))
-        self.labelItems.setText(QCoreApplication.translate("MainWindow", u"Write the item name and press enter", None))
-        self.pbExit.setText(QCoreApplication.translate("MainWindow", u"EXIT", None))
-        self.labelTax.setText(QCoreApplication.translate("MainWindow", u"Please Select Tax Values", None))
         self.taxImpIt.setText(QCoreApplication.translate("MainWindow", u"Implement Item Tax", None))
-        self.saveJson.setText(QCoreApplication.translate("MainWindow", u"Save Json", None))
-        self.removeTax.setText(QCoreApplication.translate("MainWindow", u"Remove Tax To All menu", None))
-        self.jsonName.setText("")
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Write the item name and press enter", None))
+        self.taxImpSec.setText(QCoreApplication.translate("MainWindow", u"Implement Sections Tax", None))
+        self.labelTax.setText(QCoreApplication.translate("MainWindow", u"Please Select Tax Values", None))
+        self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
+        self.menuEdit.setTitle(QCoreApplication.translate("MainWindow", u"Edit", None))
+        self.menuTax_Options.setTitle(QCoreApplication.translate("MainWindow", u"Tax Options", None))
     # retranslateUi
 

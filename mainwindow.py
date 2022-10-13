@@ -169,3 +169,4 @@ class MainWindow(QMainWindow):
         self.ui.itemList.clear()
         self.ui.itemSearch.clear()
         self.ui.addedSections.clear()
+
