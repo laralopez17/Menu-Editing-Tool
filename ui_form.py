@@ -28,6 +28,7 @@ class Ui_MainWindow(object):
         MainWindow.setTabletTracking(False)
         MainWindow.setContextMenuPolicy(Qt.DefaultContextMenu)
         MainWindow.setAcceptDrops(True)
+        MainWindow.setStyleSheet(u"")
         MainWindow.setInputMethodHints(Qt.ImhNone)
         self.gridLayout = QGridLayout(MainWindow)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -120,6 +121,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.removeTax, 7, 0, 1, 1)
 
+        self.jsonName = QLabel(MainWindow)
+        self.jsonName.setObjectName(u"jsonName")
+
+        self.gridLayout.addWidget(self.jsonName, 0, 2, 1, 1)
+
         QWidget.setTabOrder(self.loadJson, self.taxList)
         QWidget.setTabOrder(self.taxList, self.itemSearch)
         QWidget.setTabOrder(self.itemSearch, self.sectionList)
@@ -154,5 +160,6 @@ class Ui_MainWindow(object):
         self.taxImpIt.setText(QCoreApplication.translate("MainWindow", u"Implement Item Tax", None))
         self.saveJson.setText(QCoreApplication.translate("MainWindow", u"Save Json", None))
         self.removeTax.setText(QCoreApplication.translate("MainWindow", u"Remove Tax To All menu", None))
+        self.jsonName.setText("")
     # retranslateUi
 

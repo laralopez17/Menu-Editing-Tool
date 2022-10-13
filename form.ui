@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>850</width>
-    <height>506</height>
+    <width>864</width>
+    <height>512</height>
    </rect>
   </property>
   <property name="mouseTracking">
@@ -28,21 +28,24 @@
   <property name="toolTip">
    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <property name="inputMethodHints">
    <set>Qt::ImhNone</set>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="4" column="4">
+   <item row="4" column="3">
     <widget class="QPushButton" name="addSection">
      <property name="text">
       <string>Add</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="4">
+   <item row="3" column="3">
     <widget class="QComboBox" name="sectionList"/>
    </item>
-   <item row="1" column="4">
+   <item row="1" column="3">
     <widget class="QComboBox" name="taxList">
      <property name="editable">
       <bool>false</bool>
@@ -59,14 +62,14 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="4">
+   <item row="2" column="3">
     <widget class="QLabel" name="labelSections">
      <property name="text">
       <string>Please select the sections to modify</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="4">
+   <item row="6" column="3">
     <widget class="QPushButton" name="taxImpSec">
      <property name="text">
       <string>Implement Sections Tax</string>
@@ -94,6 +97,13 @@
      </property>
     </widget>
    </item>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="saveJson">
+     <property name="text">
+      <string>Save Json</string>
+     </property>
+    </widget>
+   </item>
    <item row="2" column="2">
     <widget class="QLabel" name="labelItems">
      <property name="text">
@@ -101,7 +111,7 @@
      </property>
     </widget>
    </item>
-   <item row="7" column="4">
+   <item row="7" column="3">
     <widget class="QPushButton" name="pbExit">
      <property name="minimumSize">
       <size>
@@ -114,7 +124,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="4">
+   <item row="0" column="3">
     <widget class="QLabel" name="labelTax">
      <property name="text">
       <string>Please Select Tax Values</string>
@@ -124,7 +134,7 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="4">
+   <item row="5" column="3">
     <widget class="QTextEdit" name="addedSections">
      <property name="readOnly">
       <bool>true</bool>
@@ -138,30 +148,10 @@
      </property>
     </widget>
    </item>
-   <item row="7" column="3">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="1" column="0">
-    <widget class="QPushButton" name="saveJson">
-     <property name="text">
-      <string>Save Json</string>
-     </property>
-    </widget>
-   </item>
    <item row="7" column="0">
     <widget class="QPushButton" name="removeTax">
      <property name="text">
-      <string>Remove Tax To All menu</string>
+      <string>Remove All Taxes</string>
      </property>
     </widget>
    </item>
