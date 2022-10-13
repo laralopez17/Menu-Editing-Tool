@@ -1,35 +1,36 @@
-# This Python file uses the following encoding: utf-8
-import sys
-from PySide6.QtWidgets import QWidget, QFileDialog, QMessageBox
+from PySide6.QtWidgets import QFileDialog, QMessageBox,QMainWindow
 from PySide6.QtGui import QIcon
 from jsonSection import jsonSection
-# Important:
-# You need to run the following command to generate the ui_form.py file
-#     pyside6-uic form.ui -o ui_form.py, or
-#     pyside2-uic form.ui -o ui_form.py
-from ui_form import Ui_MainWindow
 
-class MainWindow(QWidget):
+from ui_form import Ui_MainWindow
+datos = dict()
+datos = None
+
+class MainWindow(QMainWindow):
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setWindowTitle('Tax Editing Tool')
-        self.setWindowIcon(QIcon('iconoFlipdish.png'))
-        self.ui.loadJson.clicked.connect(self.clickedLoad)
-        self.ui.saveJson.clicked.connect(self.clickedSave)
-        self.ui.pbExit.clicked.connect(self.closeEvent)
+        self.setWindowIcon(QIcon('.\images\iconoFlipdish.png'))
+
+        self.ui.actionLoad_Json.triggered.connect(self.clickedLoad)
+        self.ui.actionSave_Json.triggered.connect(self.clickedSave)
+        self.ui.actionExit.triggered.connect(self.close)
+
+        self.ui.actionRemove_Tax_from_All_Sections.triggered.connect(self.clickedRemoveTax)
+        self.ui.actionApply_Tax_to_All_Sections.triggered.connect(self.clickedAllSections)
+
         global section
         section = list()
         self.ui.addSection.clicked.connect(self.slot_addedSections)
-        self.ui.allSections.clicked.connect(self.clickedAllSections)
+
         self.ui.taxImpSec.clicked.connect(self.clickedSectionImp)
         global item
         item = list()
         self.ui.itemSearch.editingFinished.connect(self.slot_agregarItem)
         self.ui.taxImpIt.clicked.connect(self.clickedItemImp)
-        self.ui.removeTax.clicked.connect(self.clickedRemoveTax)
 
 
     def abrirArchivo(self):
@@ -48,18 +49,13 @@ class MainWindow(QWidget):
         for i in range(0,len(secciones)):
             self.ui.sectionList.addItem(secciones[i])
 
-    def update(self):
-        self.ui.labelTax.adjustSize()
-
     def clickedLoad(self):
-        self.update()
         archivo = QFileDialog.getOpenFileName(self, ("Open Json"), "C:\\", ("JSON File (*.json)"))
         archivoSeparado = archivo[0].split(sep=',')
         global file
         file1 = "".join(archivoSeparado)
         file1.replace("'","")
-        global datos
-        datos = dict()
+
         self.ui.itemList.clear()
         self.ui.itemSearch.clear()
         if file1 ==  '':
@@ -68,6 +64,7 @@ class MainWindow(QWidget):
             pass
         else:
             file = file1
+            global datos
             datos = jsonSection.openJson(jsonSection,file)
             self.setTaxList()
             self.setSectionList()
@@ -77,9 +74,10 @@ class MainWindow(QWidget):
             QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 
         if reply == QMessageBox.Yes:
-            print('Window closed')
-            self.destroy()
-            sys. exit()
+            event.accept()
+        elif reply == QMessageBox.No:
+            event.ignore()
+
 
     def slot_addedSections (self):
         texto = ''
@@ -107,39 +105,64 @@ class MainWindow(QWidget):
         self.ui.itemSearch.clear()
 
     def clickedSectionImp(self):
-        print(section)
-        tax = self.ui.taxList.currentIndex()
-        jsonSection.slot_changeTaxSelectedSections(jsonSection,datos,section,tax)
-        reply = QMessageBox.information(self, 'Success!',
-        'The selected sections have been updated',QMessageBox.Ok)
+        global datos
+        if datos == None:
+            QMessageBox.warning(self, 'Warning',
+            'You must load a Json File first!',QMessageBox.Ok)
+        else:
+            print(section)
+            tax = self.ui.taxList.currentIndex()
+            jsonSection.slot_changeTaxSelectedSections(jsonSection,datos,section,tax)
+            QMessageBox.information(self, 'Success!',
+            'The selected sections have been updated',QMessageBox.Ok)
         self.clear_all()
 
     def clickedAllSections(self):
-        tax = self.ui.taxList.currentIndex()
-        jsonSection.slot_changeTaxAllSections(jsonSection,datos,tax)
-        reply = QMessageBox.information(self, 'Success!',
-        'All the items have been updated',QMessageBox.Ok)
+        global datos
+        if datos == None:
+            QMessageBox.warning(self, 'Warning',
+            'You must load a Json File first!',QMessageBox.Ok)
+        else:
+            tax = self.ui.taxList.currentIndex()
+            jsonSection.slot_changeTaxAllSections(jsonSection,datos,tax)
+            QMessageBox.information(self, 'Success!',
+            'All the items have been updated',QMessageBox.Ok)
         self.clear_all()
 
     def clickedItemImp(self):
-        tax = self.ui.taxList.currentIndex()
-        jsonSection.slot_changeTaxSelectedItems(jsonSection,datos,item,tax)
-        reply = QMessageBox.information(self, 'Success!',
-        'The selected items have been updated',QMessageBox.Ok)
+        global datos
+        if datos == None:
+            QMessageBox.warning(self, 'Warning',
+            'You must load a Json File first!',QMessageBox.Ok)
+        else:
+            tax = self.ui.taxList.currentIndex()
+            jsonSection.slot_changeTaxSelectedItems(jsonSection,datos,item,tax)
+            QMessageBox.information(self, 'Success!',
+            'The selected items have been updated',QMessageBox.Ok)
         self.clear_all()
 
     def clickedRemoveTax(self):
-        tax = None
-        jsonSection.slot_RemoveTaxAllItems(jsonSection,datos,tax)
-        reply = QMessageBox.information(self, 'Success!',
-        'All taxes have been removed from your Menu',QMessageBox.Ok)
+        global datos
+        if datos == None:
+            QMessageBox.warning(self, 'Warning',
+            'You must load a Json File first!',QMessageBox.Ok)
+        else:
+            tax = None
+            jsonSection.slot_RemoveTaxAllItems(jsonSection,datos,tax)
+            QMessageBox.information(self, 'Success!',
+            'All taxes have been removed from your Menu',QMessageBox.Ok)
         self.clear_all()
 
 
     def clickedSave(self):
-        jsonSection.save_json(jsonSection,datos,file)
-        reply = QMessageBox.information(self, 'Success!',
-        'Json Succesfully Saved!',QMessageBox.Ok)
+        global datos
+        if datos == None:
+            QMessageBox.warning(self, 'Warning',
+            'You must load a Json File first!',QMessageBox.Ok)
+        else:
+            jsonSection.save_json(jsonSection,datos,file)
+            QMessageBox.information(self, 'Success!',
+            'Json Succesfully Saved!',QMessageBox.Ok)
         self.clear_all()
 
     def clear_all(self):
