@@ -14,17 +14,14 @@ class jsonSection:
         taxes = list()
         for tax in datos['TaxRates']:
             taxes.append(tax['Name']+ " " + str(tax['Rate'])+ "%")
-
-        print(taxes)
         return taxes
+
     #sends the sections available to the mainwindow
     def slot_mostrarSecciones(self,datos):
         secciones = list()
         for section in datos['MenuSections']:
             secciones.append(section['Name'])
         return secciones
-
-
 
     #changes the taxes for the selected sections (only items for now)
     def slot_changeTaxSelectedSections(self,datos,secciones,tax):
@@ -56,9 +53,10 @@ class jsonSection:
                             for k in range(0,len(datos["MenuSections"][i]["MenuItems"])):
                                 for item in datos["MenuSections"][i]["MenuItems"]:
                                     items = datos["MenuSections"][i]["MenuItems"][k]["Name"]
-                                    if items == itemSelected[j]:
+                                    if items.lower() == itemSelected[j].lower():
                                         item['TaxRateId'] = newTaxRateId
                                         for l in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"])):
+
                                             for os in datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"]:
                                                 for osi in datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems']:
                                                     osi['TaxRateId'] = newTaxRateId
@@ -70,6 +68,20 @@ class jsonSection:
         for i in range (0,len(datos['TaxRates'])):
             if i == tax:
                 newTaxRateId = datos['TaxRates'][i]['TaxRateId']
+            for i in range (0,len(datos["MenuSections"])):
+                for k in range(0,len(datos["MenuSections"][i]["MenuItems"])):
+                    for item in datos["MenuSections"][i]["MenuItems"]:
+                        item['TaxRateId'] = newTaxRateId
+                        for l in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"])):
+                            for os in datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"]:
+                                for osi in datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems']:
+                                    osi['TaxRateId'] = newTaxRateId
+
+    def slot_RemoveTaxAllItems(self,datos,tax):
+        newTaxRateId = tax
+        for i in range (0,len(datos['TaxRates'])):
+            #if i == tax:
+                #newTaxRateId = datos['TaxRates'][i]['TaxRateId']
             for i in range (0,len(datos["MenuSections"])):
                 for k in range(0,len(datos["MenuSections"][i]["MenuItems"])):
                     for item in datos["MenuSections"][i]["MenuItems"]:
