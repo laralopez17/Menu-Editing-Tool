@@ -11,6 +11,6 @@ Also you can overwrite the old json file with the modified one.
 TO INSTALL THE PROGRAM:
 
 First, you have to download the installer called "Menu Tax Tool.exe".
-Second, double click on the dowloaded file and follow the instructions!
+Second, double click on the downloaded file, unzip it, open the file and follow the instructions!
 
 To run the program, just go to the folder where the program was installed and double click on "Menu Tax Tool.exe" file.
