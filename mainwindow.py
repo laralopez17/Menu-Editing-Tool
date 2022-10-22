@@ -26,23 +26,20 @@ class MainWindow(QMainWindow):
         section = list()
         self.ui.addSection.clicked.connect(self.slot_addedSections)
         self.ui.taxImpSec.clicked.connect(self.clickedSectionImp)
-
         global item
         item = list()
         global aux
         aux = list()
         self.ui.addItem.clicked.connect(self.slot_addedItem)
         self.ui.taxImpIt.clicked.connect(self.clickedItemImp)
-
         global osFjson
         osFjson = list()
-
         global os
         os = list()
-
         global osOption
         osOption = list()
-
+        global data
+        data = list()
         global auxOS
         auxOS = list()
         global auxOSMaster
@@ -88,35 +85,57 @@ class MainWindow(QMainWindow):
 #sets the list of OS available on the menu
     def setOSList(self):
         global osFjson
+        self.ui.osList.clear()
         osFjson = jsonSection.slot_mostrarOS(jsonSection,datos)
+        os = ""
+        osOp = list()
         for i in range(0,len(osFjson)):
             for j in range(0,len(datos["MenuSections"])):
                 for k in range(0,len(datos["MenuSections"][j]["MenuItems"])):
                     for l in range(0,len(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"])):
                         if osFjson[i] == datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name']:
                             os = datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name']
-            self.ui.osList.addItem(os)
-            self.setOptionList()
+                            for m in range(0,len(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"])):
+                                osOp.append(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name'])
+            if os == None and osOp == []:
+                pass
+            elif os != None and osOp == []:
+                pass
+            else:
+                self.ui.osList.addItem(os)
+                self.setOptionList()
+            osOp.clear()
 
 #sets the list of options that are on each OS on the menu
     def setOptionList(self):
         global osOptions
+        global data
         osOptions.clear()
         self.ui.optionsList.clear()
         for i in range(0,len(osFjson)):
             for j in range(0,len(datos["MenuSections"])):
                 for k in range(0,len(datos["MenuSections"][j]["MenuItems"])):
                     for l in range(0,len(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"])):
-                        #MenuItemOptionSet =  datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name']
-                        if self.ui.osList.currentText() ==  datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name']:
-                            data =  datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name']
+                        #print ("Esto es currentText: ", self.ui.osList.currentText(), " Esto data: ", datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name'])
+                        if self.ui.osList.currentText() == "" and datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name'] == None:
+                                data = datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name']
+                                for m in range(0,len(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"])):
+                                    if datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["IsMasterOptionSet"] == False:
+                                        smt = datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name']
+                                        if smt not in osOptions:
+                                            osOptions.append(smt)
+                        elif self.ui.osList.currentText() ==  datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name']:
+                            data = datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name']
                             for m in range(0,len(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"])):
-                                smt = datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name']
-                                if smt not in osOptions:
-                                    osOptions.append(smt)
+                                if datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["IsMasterOptionSet"] == False:
+                                    smt = datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name']
+                                    if smt not in osOptions:
+                                        osOptions.append(smt)
         osOptions.insert(0,"Change All")
         for i in range(0,len(osOptions)):
-            if self.ui.osList.currentText() == data:
+            if self.ui.osList.currentText()== "":
+                selfCurrentT = None
+            if self.ui.osList.currentText() == data or selfCurrentT == data:
                 self.ui.optionsList.addItem(osOptions[i])
 
 #loads the json and sets up all the dropping lists
@@ -134,6 +153,7 @@ class MainWindow(QMainWindow):
             self.ui.itemsList.clear()
             self.ui.osList.clear()
             self.ui.optionsList.clear()
+            self.ui.addedOS.clear()
             pass
         else:
             file = file1
@@ -143,6 +163,8 @@ class MainWindow(QMainWindow):
             self.setSectionList()
             self.setItemsList()
             self.setOSList()
+            self.ui.addedOS.clear()
+
 #closes the program
     def closeEvent(self, event):
         reply = QMessageBox.question(self, 'Window Close', 'Are you sure you want to close the window?',
@@ -168,7 +190,7 @@ class MainWindow(QMainWindow):
 #shows the items selected on the text edit
     def slot_addedItem(self):
         texto = ''
-        if self.ui.itemsList.currentText() in item:
+        if self.ui.itemsList.currentText() in aux:
             pass
         else:
             aux.append(self.ui.itemsList.currentText())
@@ -178,21 +200,33 @@ class MainWindow(QMainWindow):
                 if texto != "":
                     texto += "\n"
                     self.ui.addedItems.setText(texto)
+
 #shows the OS options selected on the text edit
     def slot_addedOsOption(self):
         texto = ''
-
         if self.ui.optionsList.currentText() in auxOS:
-            pass
+            if self.ui.osList.currentText() in auxOSMaster:
+                pass
+            else:
+                auxOS.append(self.ui.optionsList.currentText())
+                #if self.ui.osList.currentText() not in auxOSMaster:
+                auxOSMaster.append(self.ui.osList.currentText())
+                for i in range(0,len(auxOS)):
+                    texto += auxOSMaster[i] + ": " + auxOS[i]
+                    if texto != "":
+                        texto += "\n"
+                        self.ui.addedOS.setText(texto)
         else:
             auxOS.append(self.ui.optionsList.currentText())
-            if self.ui.osList.currentText() not in auxOSMaster:
-                auxOSMaster.append(self.ui.osList.currentText())
+            #if self.ui.osList.currentText() not in auxOSMaster:
+            auxOSMaster.append(self.ui.osList.currentText())
             for i in range(0,len(auxOS)):
-                texto += auxOS[i]
+                texto += auxOSMaster[i] + ": " + auxOS[i]
                 if texto != "":
                     texto += "\n"
                     self.ui.addedOS.setText(texto)
+
+
 #button that applies tax to the selected sections
     def clickedSectionImp(self):
         global datos
@@ -205,7 +239,8 @@ class MainWindow(QMainWindow):
             QMessageBox.information(self, 'Success!',
             'The selected sections have been updated',QMessageBox.Ok)
         section.clear()
-        self.clear_all()
+        self.ui.addedSections.clear()
+
 #button that applies tax to the selected option OS
     def clickedOSImp(self):
         global datos
@@ -234,6 +269,7 @@ class MainWindow(QMainWindow):
             jsonSection.slot_changeTaxSelectedItems(jsonSection,datos,item,tax)
             QMessageBox.information(self, 'Success!',
             'The selected items have been updated',QMessageBox.Ok)
+        aux.clear()
         item.clear()
         self.ui.addedItems.clear()
 
@@ -277,3 +313,10 @@ class MainWindow(QMainWindow):
     def clear_all(self):
         self.ui.addedItems.clear()
         self.ui.addedSections.clear()
+        self.ui.addedOS.clear()
+        auxOS.clear()
+        osOptions.clear()
+        auxOSMaster.clear()
+        item.clear()
+        section.clear()
+        aux.clear()

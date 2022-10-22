@@ -26,6 +26,7 @@ class jsonSection:
 #shows a list of the os on the menu
     def slot_mostrarOS(self,datos):
         os = list()
+        os1 = ""
         for i in range(0,len(datos["MenuSections"])):
             for k in range(0,len(datos["MenuSections"][i]["MenuItems"])):
                 for l in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"])):
@@ -104,7 +105,7 @@ class jsonSection:
                             osName = datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["Name"]
                             if osSelected[j] == "Change All":
                                 for osi in datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems']:
-                                    if osName in os:
+                                    if osName == os[j]:
                                         osi['TaxRateId'] = newTaxRateId
                             elif osSelected[j] == datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['Name']:
                                 datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['TaxRateId'] = newTaxRateId
