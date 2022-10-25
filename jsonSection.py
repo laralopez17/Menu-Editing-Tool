@@ -1,4 +1,5 @@
 ﻿import json
+import base64
 
 class jsonSection:
     def __init__(self):
@@ -109,6 +110,28 @@ class jsonSection:
                                         osi['TaxRateId'] = newTaxRateId
                             elif osSelected[j] == datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['Name']:
                                 datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['TaxRateId'] = newTaxRateId
+
+
+    def slot_changeTaxSelectedSS(self,datos,SSitems,text,tax):
+        newTaxRateId = 0
+        for i in range (0,len(datos['TaxRates'])):
+            if i == tax:
+                newTaxRateId = datos['TaxRates'][i]['TaxRateId']
+        for t in range(0,len(text)):
+            for j in range(0,len(SSitems)):
+                for i in range(0,len(datos["MenuSections"])):
+                    for k in range(0,len(datos["MenuSections"][i]["MenuItems"])):
+                        if SSitems[j] == datos["MenuSections"][i]["MenuItems"][k]["Name"]:
+                            datos["MenuSections"][i]["MenuItems"][k]['TaxRateId'] = newTaxRateId
+                            for l in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"])):
+                                for os in datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"]:
+                                    for osi in datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems']:
+                                        osi['TaxRateId'] = newTaxRateId
+
+                        for l in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"])):
+                            for m in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'])):
+                                if SSitems[j] == datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['Name']:
+                                    datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['TaxRateId'] = newTaxRateId                                   
 
 
     #changes the taxes for all sections (only items for now)

@@ -26,29 +26,48 @@ class MainWindow(QMainWindow):
         section = list()
         self.ui.addSection.clicked.connect(self.slot_addedSections)
         self.ui.taxImpSec.clicked.connect(self.clickedSectionImp)
+
         global item
         item = list()
         global aux
         aux = list()
         self.ui.addItem.clicked.connect(self.slot_addedItem)
         self.ui.taxImpIt.clicked.connect(self.clickedItemImp)
+
         global osFjson
         osFjson = list()
+
         global os
         os = list()
+        global aux2
+        aux2 = list()
         global osOption
         osOption = list()
-        global data
-        data = list()
+        global auxiliar
+        auxiliar = list()
         global auxOS
         auxOS = list()
+        global data
+        data = list()
         global auxOSMaster
         auxOSMaster = list()
         global osOptions
         osOptions = list()
+        global texto1
+        texto1 = str()
         self.ui.osList.activated.connect(self.setOptionList)
         self.ui.addOS.clicked.connect(self.slot_addedOsOption)
         self.ui.taxImpOS.clicked.connect(self.clickedOSImp)
+
+        global smartSearch
+        smartSearch = list()
+        global text
+        text = list()
+        global auxSS
+        auxSS = list()
+        self.ui.leSmartSearch.editingFinished.connect(self.slot_setSSList)
+        self.ui.addSmartSearch.clicked.connect(self.slot_addedSS)
+        self.ui.taxImpSmartSearch.clicked.connect(self.clickedSSImp)
 
 ##########################################################################################
 ##########################################################################################
@@ -57,6 +76,7 @@ class MainWindow(QMainWindow):
     def abrirArchivo(self):
         archivo = QFileDialog.getOpenFileName(self, ("Open Json"), "C:\\", "Text files(*.txt);;Archivo JSON(.json)")
         print(archivo)
+
 #sets the list of taxes that are on the menu
     def setTaxList(self):
         self.ui.taxList.clear()
@@ -116,14 +136,13 @@ class MainWindow(QMainWindow):
             for j in range(0,len(datos["MenuSections"])):
                 for k in range(0,len(datos["MenuSections"][j]["MenuItems"])):
                     for l in range(0,len(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"])):
-                        #print ("Esto es currentText: ", self.ui.osList.currentText(), " Esto data: ", datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name'])
                         if self.ui.osList.currentText() == "" and datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name'] == None:
-                                data = datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name']
-                                for m in range(0,len(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"])):
-                                    if datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["IsMasterOptionSet"] == False:
-                                        smt = datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name']
-                                        if smt not in osOptions:
-                                            osOptions.append(smt)
+                            data = datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name']
+                            for m in range(0,len(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"])):
+                                if datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["IsMasterOptionSet"] == False:
+                                    smt = datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name']
+                                    if smt not in osOptions:
+                                        osOptions.append(smt)
                         elif self.ui.osList.currentText() ==  datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name']:
                             data = datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]['Name']
                             for m in range(0,len(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"])):
@@ -137,6 +156,37 @@ class MainWindow(QMainWindow):
                 selfCurrentT = None
             if self.ui.osList.currentText() == data or selfCurrentT == data:
                 self.ui.optionsList.addItem(osOptions[i])
+
+#sets the list of options and items that matches the search
+    def slot_setSSList(self):
+        self.ui.smartSearchList.clear()
+        smartSearch.clear()
+        textito = ""
+        textito = self.ui.leSmartSearch.text()
+        for j in range(0,len(datos["MenuSections"])):
+            for k in range(0,len(datos["MenuSections"][j]["MenuItems"])):
+                itemsSS = datos["MenuSections"][j]["MenuItems"][k]["Name"]
+                if textito.lower() in ascii(datos["MenuSections"][j]["MenuItems"][k]["Name"]).lower():
+                    if itemsSS not in smartSearch:
+                        smartSearch.append(itemsSS)
+                        if textito not in text:
+                            text.append(textito)
+                if len(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"]) == 0:
+                    pass
+                else:
+                    for l in range(0,len(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"])):
+                        for m in range(0,len(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"])):
+                            opSS = datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name']
+                            if textito.lower() in ascii(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name']).lower() and opSS not in smartSearch:
+                                smartSearch.append(opSS)
+                                if textito not in text:
+                                    text.append(textito)
+        if len(smartSearch) != 0:
+            smartSearch.insert(0,"Change All")
+        for i in range(0,len(smartSearch)):
+            self.ui.smartSearchList.addItem(smartSearch[i])
+        self.ui.leSmartSearch.clear()
+
 
 #loads the json and sets up all the dropping lists
     def clickedLoad(self):
@@ -174,6 +224,8 @@ class MainWindow(QMainWindow):
             event.accept()
         elif reply == QMessageBox.No:
             event.ignore()
+
+
 #shows the sections selected on the text edit
     def slot_addedSections (self):
         texto = ''
@@ -190,7 +242,7 @@ class MainWindow(QMainWindow):
 #shows the items selected on the text edit
     def slot_addedItem(self):
         texto = ''
-        if self.ui.itemsList.currentText() in aux:
+        if self.ui.itemsList.currentText() in item:
             pass
         else:
             aux.append(self.ui.itemsList.currentText())
@@ -226,6 +278,27 @@ class MainWindow(QMainWindow):
                     texto += "\n"
                     self.ui.addedOS.setText(texto)
 
+#shows the SS options selected on the text edit
+    def slot_addedSS(self):
+        texto = ''
+        if self.ui.smartSearchList.currentText() in auxSS:
+                pass
+        elif self.ui.smartSearchList.currentText() == "Change All":
+            for i in range(1,len(smartSearch)):
+                auxSS.append(smartSearch[i])
+            for i in range(0,len(auxSS)):
+                texto += auxSS[i]
+                if texto != "":
+                    texto += "\n"
+                    self.ui.addedSS.setText(texto)
+        else:
+            auxSS.append(self.ui.smartSearchList.currentText())
+            for i in range(0,len(auxSS)):
+                texto += auxSS[i]
+                if texto != "":
+                    texto += "\n"
+                    self.ui.addedSS.setText(texto)
+
 
 #button that applies tax to the selected sections
     def clickedSectionImp(self):
@@ -240,6 +313,22 @@ class MainWindow(QMainWindow):
             'The selected sections have been updated',QMessageBox.Ok)
         section.clear()
         self.ui.addedSections.clear()
+
+
+#button that applies tax to the selected items
+    def clickedItemImp(self):
+        global datos
+        if datos == None:
+            QMessageBox.warning(self, 'Warning',
+            'You must load a Json File first!',QMessageBox.Ok)
+        else:
+            tax = self.ui.taxList.currentIndex()
+            jsonSection.slot_changeTaxSelectedItems(jsonSection,datos,item,tax)
+            QMessageBox.information(self, 'Success!',
+            'The selected items have been updated',QMessageBox.Ok)
+        aux.clear()
+        item.clear()
+        self.ui.addedItems.clear()
 
 #button that applies tax to the selected option OS
     def clickedOSImp(self):
@@ -257,21 +346,20 @@ class MainWindow(QMainWindow):
         auxOS.clear()
         self.ui.addedOS.clear()
 
-#button that applies tax to the selected items
-    def clickedItemImp(self):
+    def clickedSSImp(self):
         global datos
-        aux.clear()
         if datos == None:
             QMessageBox.warning(self, 'Warning',
             'You must load a Json File first!',QMessageBox.Ok)
         else:
             tax = self.ui.taxList.currentIndex()
-            jsonSection.slot_changeTaxSelectedItems(jsonSection,datos,item,tax)
+            jsonSection.slot_changeTaxSelectedSS(jsonSection,datos,auxSS,text,tax)
             QMessageBox.information(self, 'Success!',
             'The selected items have been updated',QMessageBox.Ok)
-        aux.clear()
-        item.clear()
-        self.ui.addedItems.clear()
+        auxSS.clear()
+        text.clear()
+        self.ui.smartSearchList.clear()
+        self.ui.addedSS.clear()
 
 #applies taxes to all the menu
     def clickedAllSections(self):
@@ -314,9 +402,13 @@ class MainWindow(QMainWindow):
         self.ui.addedItems.clear()
         self.ui.addedSections.clear()
         self.ui.addedOS.clear()
+        self.ui.smartSearchList.clear()
+        self.ui.addedSS.clear()
+        auxSS.clear()
         auxOS.clear()
         osOptions.clear()
         auxOSMaster.clear()
         item.clear()
         section.clear()
         aux.clear()
+        text.clear()
