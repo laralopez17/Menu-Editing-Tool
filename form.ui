@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>831</width>
-    <height>611</height>
+    <width>865</width>
+    <height>742</height>
    </rect>
   </property>
   <property name="font">
@@ -27,83 +27,798 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_3">
-    <item row="0" column="1" alignment="Qt::AlignHCenter">
-     <widget class="QLabel" name="labelTax">
+    <item row="0" column="0">
+     <widget class="QPushButton" name="TAXBUTTON">
       <property name="text">
-       <string>Please Select Tax Values</string>
+       <string>Tax Modifications</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="0" colspan="3">
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="focusPolicy">
-       <enum>Qt::TabFocus</enum>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="PRICEBUTTON">
+      <property name="text">
+       <string>Price Modifications</string>
       </property>
-      <property name="contextMenuPolicy">
-       <enum>Qt::DefaultContextMenu</enum>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="2">
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
       </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>Section Modifications</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_8">
-        <item row="0" column="1">
-         <widget class="QGroupBox" name="sectionModification">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+      <widget class="QWidget" name="pricePage">
+       <layout class="QGridLayout" name="gridLayout_10">
+        <item row="4" column="0" colspan="7">
+         <widget class="QTabWidget" name="tabWidget_2">
+          <property name="currentIndex">
+           <number>1</number>
           </property>
-          <property name="title">
-           <string>Section Modifications</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_2">
-           <item row="3" column="1" colspan="2">
-            <widget class="QPushButton" name="addSection">
-             <property name="text">
-              <string>Add Section</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1" colspan="2">
-            <widget class="QComboBox" name="sectionList">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="1" colspan="2">
-            <widget class="QPushButton" name="taxImpSec">
-             <property name="text">
-              <string>Implement Tax</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="1" colspan="2">
-            <widget class="QTextEdit" name="addedSections"/>
-           </item>
-           <item row="0" column="1" colspan="2" alignment="Qt::AlignHCenter">
-            <widget class="QLabel" name="labelSection">
-             <property name="font">
-              <font>
-               <family>Yu Gothic</family>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Select the Sections to Modify</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QWidget" name="tab_5">
+           <attribute name="title">
+            <string>Section Modifications</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_13">
+            <item row="0" column="1">
+             <widget class="QGroupBox" name="sectionModification_2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="title">
+               <string>Section Modifications</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_12">
+               <item row="3" column="1" colspan="2">
+                <widget class="QPushButton" name="addSection_2">
+                 <property name="text">
+                  <string>Add Section</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1" colspan="2">
+                <widget class="QComboBox" name="sectionList_2">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="1" colspan="2">
+                <widget class="QPushButton" name="priceImpSec">
+                 <property name="text">
+                  <string>Implement Price</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1" colspan="2">
+                <widget class="QTextEdit" name="addedSections_2"/>
+               </item>
+               <item row="0" column="1" colspan="2" alignment="Qt::AlignHCenter">
+                <widget class="QLabel" name="labelSection_2">
+                 <property name="font">
+                  <font>
+                   <family>Yu Gothic</family>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Select the Sections to Modify</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <widget class="QCheckBox" name="modOS">
+                 <property name="text">
+                  <string>Modify OS</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QCheckBox" name="modMO">
+                 <property name="text">
+                  <string>Modify MO</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <spacer name="horizontalSpacer_13">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="4">
+             <spacer name="horizontalSpacer_14">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_6">
+           <attribute name="title">
+            <string>Item Modifications</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_15">
+            <item row="0" column="0">
+             <spacer name="horizontalSpacer_15">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>231</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="1" rowspan="2">
+             <widget class="QGroupBox" name="itemsModification_2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="title">
+               <string>Item Modifications</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_14">
+               <item row="6" column="0" colspan="2">
+                <widget class="QPushButton" name="priceImpIt">
+                 <property name="text">
+                  <string>Implement Price</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="2">
+                <widget class="QComboBox" name="itemsList_2">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="modelColumn">
+                  <number>0</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0" colspan="2">
+                <widget class="QTextEdit" name="addedItems_2"/>
+               </item>
+               <item row="0" column="0" colspan="2" alignment="Qt::AlignHCenter">
+                <widget class="QLabel" name="labelItems_2">
+                 <property name="font">
+                  <font>
+                   <family>Yu Gothic</family>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Select the Items to Modify</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0" colspan="2">
+                <widget class="QPushButton" name="addItem_2">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Add Item</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QCheckBox" name="modMO1">
+                 <property name="text">
+                  <string>Modify MO</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QCheckBox" name="modSO1">
+                 <property name="text">
+                  <string>Modify SO</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <spacer name="horizontalSpacer_16">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>227</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_7">
+           <attribute name="title">
+            <string>Option Set Modifications</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_17">
+            <item row="0" column="0">
+             <spacer name="horizontalSpacer_17">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>231</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="1">
+             <widget class="QGroupBox" name="optionSetModification_2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="title">
+               <string>Option Set Modifications</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_16">
+               <item row="3" column="0" colspan="2">
+                <widget class="QPushButton" name="addOS_2">
+                 <property name="text">
+                  <string>Add Option</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="2">
+                <widget class="QComboBox" name="osList_2"/>
+               </item>
+               <item row="0" column="0" colspan="2" alignment="Qt::AlignHCenter">
+                <widget class="QLabel" name="labelOS_2">
+                 <property name="text">
+                  <string>Select the OS to Modify</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0" colspan="2">
+                <widget class="QPushButton" name="priceImpOS">
+                 <property name="text">
+                  <string>Implement Price</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="2">
+                <widget class="QComboBox" name="optionsList_2"/>
+               </item>
+               <item row="4" column="0" colspan="2">
+                <widget class="QTextEdit" name="addedOS_2"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <spacer name="horizontalSpacer_18">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>231</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_8">
+           <attribute name="title">
+            <string>Smart Search</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_19">
+            <item row="0" column="0">
+             <spacer name="horizontalSpacer_19">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>231</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="1">
+             <widget class="QGroupBox" name="groupBox_2">
+              <property name="title">
+               <string>Smart Search</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_18">
+               <item row="1" column="0">
+                <widget class="QLineEdit" name="leSmartSearch_2"/>
+               </item>
+               <item row="0" column="0" alignment="Qt::AlignHCenter">
+                <widget class="QLabel" name="labelSmartSearch_2">
+                 <property name="text">
+                  <string>Smart Search</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QTextEdit" name="addedSS_2"/>
+               </item>
+               <item row="5" column="0">
+                <widget class="QPushButton" name="priceImpSmartSearch">
+                 <property name="text">
+                  <string>Implement Price</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QPushButton" name="addSmartSearch_2">
+                 <property name="text">
+                  <string>Add Item</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QComboBox" name="smartSearchList_2"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <spacer name="horizontalSpacer_20">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>231</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
          </widget>
         </item>
-        <item row="0" column="0">
-         <spacer name="horizontalSpacer_8">
+        <item row="3" column="0" colspan="7">
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="4" colspan="2">
+         <widget class="QLineEdit" name="leIncrease"/>
+        </item>
+        <item row="1" column="0" colspan="3">
+         <widget class="QComboBox" name="priceListSelected">
+          <item>
+           <property name="text">
+            <string>Increase or Decrease %</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Increase or Decrease Fixed Amount</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="2" column="2" colspan="4">
+         <widget class="QLabel" name="price">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="taxPage">
+       <layout class="QGridLayout" name="gridLayout_11">
+        <item row="2" column="1">
+         <widget class="QComboBox" name="taxList"/>
+        </item>
+        <item row="4" column="0" colspan="3">
+         <widget class="QTabWidget" name="tabWidget">
+          <property name="focusPolicy">
+           <enum>Qt::TabFocus</enum>
+          </property>
+          <property name="contextMenuPolicy">
+           <enum>Qt::DefaultContextMenu</enum>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="tab">
+           <attribute name="title">
+            <string>Section Modifications</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_8">
+            <item row="0" column="2">
+             <widget class="QGroupBox" name="sectionModification">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="title">
+               <string>Section Modifications</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_2">
+               <item row="3" column="1" colspan="2">
+                <widget class="QPushButton" name="addSection">
+                 <property name="text">
+                  <string>Add Section</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1" colspan="2">
+                <widget class="QComboBox" name="sectionList">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="1" colspan="2">
+                <widget class="QPushButton" name="taxImpSec">
+                 <property name="text">
+                  <string>Implement Tax</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1" colspan="2">
+                <widget class="QTextEdit" name="addedSections"/>
+               </item>
+               <item row="0" column="1" colspan="2" alignment="Qt::AlignHCenter">
+                <widget class="QLabel" name="labelSection">
+                 <property name="font">
+                  <font>
+                   <family>Yu Gothic</family>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Select the Sections to Modify</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <spacer name="horizontalSpacer_8">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="4">
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_2">
+           <attribute name="title">
+            <string>Items Modifications</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_7">
+            <item row="0" column="1">
+             <widget class="QGroupBox" name="itemsModification">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="title">
+               <string>Item Modifications</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout">
+               <item row="6" column="0" colspan="2">
+                <widget class="QPushButton" name="taxImpIt">
+                 <property name="text">
+                  <string>Implement Tax</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="2">
+                <widget class="QComboBox" name="itemsList">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="modelColumn">
+                  <number>0</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0" colspan="2">
+                <widget class="QTextEdit" name="addedItems"/>
+               </item>
+               <item row="0" column="0" colspan="2" alignment="Qt::AlignHCenter">
+                <widget class="QLabel" name="labelItems">
+                 <property name="font">
+                  <font>
+                   <family>Yu Gothic</family>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Select the Items to Modify</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0" colspan="2">
+                <widget class="QPushButton" name="addItem">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Add Item</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="0">
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_3">
+           <attribute name="title">
+            <string>Option Set Modifications</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_6">
+            <item row="0" column="1">
+             <widget class="QGroupBox" name="optionSetModification">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="title">
+               <string>Option Set Modifications</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_4">
+               <item row="3" column="0" colspan="2">
+                <widget class="QPushButton" name="addOS">
+                 <property name="text">
+                  <string>Add Option</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="2">
+                <widget class="QComboBox" name="osList"/>
+               </item>
+               <item row="0" column="0" colspan="2" alignment="Qt::AlignHCenter">
+                <widget class="QLabel" name="labelOS">
+                 <property name="text">
+                  <string>Select the OS to Modify</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0" colspan="2">
+                <widget class="QPushButton" name="taxImpOS">
+                 <property name="text">
+                  <string>Implement Tax</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="2">
+                <widget class="QComboBox" name="optionsList"/>
+               </item>
+               <item row="4" column="0" colspan="2">
+                <widget class="QTextEdit" name="addedOS"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="0">
+             <spacer name="horizontalSpacer_9">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_4">
+           <attribute name="title">
+            <string>Smart Search</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_9">
+            <item row="0" column="2">
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="1">
+             <widget class="QGroupBox" name="groupBox">
+              <property name="title">
+               <string>Smart Search</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_5">
+               <item row="1" column="0">
+                <widget class="QLineEdit" name="leSmartSearch"/>
+               </item>
+               <item row="0" column="0" alignment="Qt::AlignHCenter">
+                <widget class="QLabel" name="labelSmartSearch">
+                 <property name="text">
+                  <string>Smart Search</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QTextEdit" name="addedSS"/>
+               </item>
+               <item row="5" column="0">
+                <widget class="QPushButton" name="taxImpSmartSearch">
+                 <property name="text">
+                  <string>Implement Tax</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QPushButton" name="addSmartSearch">
+                 <property name="text">
+                  <string>Add Item</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QComboBox" name="smartSearchList"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <spacer name="horizontalSpacer_10">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="labelTax">
+          <property name="text">
+           <string>Please Select Tax Values</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <spacer name="horizontalSpacer_5">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -115,7 +830,7 @@
           </property>
          </spacer>
         </item>
-        <item row="0" column="2">
+        <item row="1" column="2">
          <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -128,292 +843,16 @@
           </property>
          </spacer>
         </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>Items Modifications</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_7">
-        <item row="0" column="1">
-         <widget class="QGroupBox" name="itemsModification">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+        <item row="3" column="0" colspan="3">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
-          <property name="title">
-           <string>Item Modifications</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout">
-           <item row="6" column="0" colspan="2">
-            <widget class="QPushButton" name="taxImpIt">
-             <property name="text">
-              <string>Implement Tax</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="2">
-            <widget class="QComboBox" name="itemsList">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="modelColumn">
-              <number>0</number>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0" colspan="2">
-            <widget class="QTextEdit" name="addedItems"/>
-           </item>
-           <item row="0" column="0" colspan="2" alignment="Qt::AlignHCenter">
-            <widget class="QLabel" name="labelItems">
-             <property name="font">
-              <font>
-               <family>Yu Gothic</family>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Select the Items to Modify</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0" colspan="2">
-            <widget class="QPushButton" name="addItem">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>Add Item</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
          </widget>
-        </item>
-        <item row="0" column="2">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="0">
-         <spacer name="horizontalSpacer_7">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_3">
-       <attribute name="title">
-        <string>Option Set Modifications</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_6">
-        <item row="0" column="1">
-         <widget class="QGroupBox" name="optionSetModification">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="title">
-           <string>Option Set Modifications</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_4">
-           <item row="3" column="0" colspan="2">
-            <widget class="QPushButton" name="addOS">
-             <property name="text">
-              <string>Add Option</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="2">
-            <widget class="QComboBox" name="osList"/>
-           </item>
-           <item row="0" column="0" colspan="2" alignment="Qt::AlignHCenter">
-            <widget class="QLabel" name="labelOS">
-             <property name="text">
-              <string>Select the OS to Modify</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0" colspan="2">
-            <widget class="QPushButton" name="taxImpOS">
-             <property name="text">
-              <string>Implement Tax</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0" colspan="2">
-            <widget class="QComboBox" name="optionsList"/>
-           </item>
-           <item row="4" column="0" colspan="2">
-            <widget class="QTextEdit" name="addedOS"/>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="0">
-         <spacer name="horizontalSpacer_9">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_4">
-       <attribute name="title">
-        <string>Smart Search</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_9">
-        <item row="0" column="2">
-         <spacer name="horizontalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="1">
-         <widget class="QGroupBox" name="groupBox">
-          <property name="title">
-           <string>Smart Search</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_5">
-           <item row="1" column="0">
-            <widget class="QLineEdit" name="leSmartSearch"/>
-           </item>
-           <item row="0" column="0" alignment="Qt::AlignHCenter">
-            <widget class="QLabel" name="labelSmartSearch">
-             <property name="text">
-              <string>Smart Search</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
-            <widget class="QTextEdit" name="addedSS"/>
-           </item>
-           <item row="5" column="0">
-            <widget class="QPushButton" name="taxImpSmartSearch">
-             <property name="text">
-              <string>Implement Tax</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QPushButton" name="addSmartSearch">
-             <property name="text">
-              <string>Add Item</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QComboBox" name="smartSearchList"/>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <spacer name="horizontalSpacer_10">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
         </item>
        </layout>
       </widget>
      </widget>
-    </item>
-    <item row="0" column="0">
-     <spacer name="horizontalSpacer_5">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="2">
-     <spacer name="horizontalSpacer_6">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="2" column="0" colspan="3">
-     <widget class="Line" name="line">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QComboBox" name="taxList"/>
     </item>
    </layout>
   </widget>
@@ -422,7 +861,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>831</width>
+     <width>865</width>
      <height>29</height>
     </rect>
    </property>
@@ -505,7 +944,6 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>taxList</tabstop>
   <tabstop>tabWidget</tabstop>
   <tabstop>sectionList</tabstop>
   <tabstop>addSection</tabstop>
