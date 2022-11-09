@@ -16,17 +16,17 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
-    QGroupBox, QLabel, QLineEdit, QMainWindow,
-    QMenu, QMenuBar, QPushButton, QSizePolicy,
-    QSpacerItem, QStatusBar, QTabWidget, QTextEdit,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
+    QGridLayout, QGroupBox, QLabel, QLineEdit,
+    QMainWindow, QMenu, QMenuBar, QPushButton,
+    QSizePolicy, QSpacerItem, QStackedWidget, QStatusBar,
+    QTabWidget, QTextEdit, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(831, 611)
+        MainWindow.resize(865, 742)
         font = QFont()
         font.setFamilies([u"Yu Gothic"])
         font.setPointSize(9)
@@ -56,12 +56,291 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout_3 = QGridLayout(self.centralwidget)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.labelTax = QLabel(self.centralwidget)
-        self.labelTax.setObjectName(u"labelTax")
+        self.TAXBUTTON = QPushButton(self.centralwidget)
+        self.TAXBUTTON.setObjectName(u"TAXBUTTON")
 
-        self.gridLayout_3.addWidget(self.labelTax, 0, 1, 1, 1, Qt.AlignHCenter)
+        self.gridLayout_3.addWidget(self.TAXBUTTON, 0, 0, 1, 1)
 
-        self.tabWidget = QTabWidget(self.centralwidget)
+        self.PRICEBUTTON = QPushButton(self.centralwidget)
+        self.PRICEBUTTON.setObjectName(u"PRICEBUTTON")
+
+        self.gridLayout_3.addWidget(self.PRICEBUTTON, 0, 1, 1, 1)
+
+        self.stackedWidget = QStackedWidget(self.centralwidget)
+        self.stackedWidget.setObjectName(u"stackedWidget")
+        self.stackedWidget.setFrameShape(QFrame.NoFrame)
+        self.stackedWidget.setFrameShadow(QFrame.Plain)
+        self.pricePage = QWidget()
+        self.pricePage.setObjectName(u"pricePage")
+        self.gridLayout_10 = QGridLayout(self.pricePage)
+        self.gridLayout_10.setObjectName(u"gridLayout_10")
+        self.tabWidget_2 = QTabWidget(self.pricePage)
+        self.tabWidget_2.setObjectName(u"tabWidget_2")
+        self.tab_5 = QWidget()
+        self.tab_5.setObjectName(u"tab_5")
+        self.gridLayout_13 = QGridLayout(self.tab_5)
+        self.gridLayout_13.setObjectName(u"gridLayout_13")
+        self.sectionModification_2 = QGroupBox(self.tab_5)
+        self.sectionModification_2.setObjectName(u"sectionModification_2")
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.sectionModification_2.sizePolicy().hasHeightForWidth())
+        self.sectionModification_2.setSizePolicy(sizePolicy)
+        self.gridLayout_12 = QGridLayout(self.sectionModification_2)
+        self.gridLayout_12.setObjectName(u"gridLayout_12")
+        self.addSection_2 = QPushButton(self.sectionModification_2)
+        self.addSection_2.setObjectName(u"addSection_2")
+
+        self.gridLayout_12.addWidget(self.addSection_2, 3, 1, 1, 2)
+
+        self.sectionList_2 = QComboBox(self.sectionModification_2)
+        self.sectionList_2.setObjectName(u"sectionList_2")
+        self.sectionList_2.setEnabled(True)
+
+        self.gridLayout_12.addWidget(self.sectionList_2, 1, 1, 1, 2)
+
+        self.priceImpSec = QPushButton(self.sectionModification_2)
+        self.priceImpSec.setObjectName(u"priceImpSec")
+
+        self.gridLayout_12.addWidget(self.priceImpSec, 6, 1, 1, 2)
+
+        self.addedSections_2 = QTextEdit(self.sectionModification_2)
+        self.addedSections_2.setObjectName(u"addedSections_2")
+
+        self.gridLayout_12.addWidget(self.addedSections_2, 5, 1, 1, 2)
+
+        self.labelSection_2 = QLabel(self.sectionModification_2)
+        self.labelSection_2.setObjectName(u"labelSection_2")
+        font1 = QFont()
+        font1.setFamilies([u"Yu Gothic"])
+        font1.setPointSize(10)
+        self.labelSection_2.setFont(font1)
+
+        self.gridLayout_12.addWidget(self.labelSection_2, 0, 1, 1, 2, Qt.AlignHCenter)
+
+        self.modOS = QCheckBox(self.sectionModification_2)
+        self.modOS.setObjectName(u"modOS")
+
+        self.gridLayout_12.addWidget(self.modOS, 2, 2, 1, 1)
+
+        self.modMO = QCheckBox(self.sectionModification_2)
+        self.modMO.setObjectName(u"modMO")
+        self.modMO.setChecked(True)
+
+        self.gridLayout_12.addWidget(self.modMO, 2, 1, 1, 1)
+
+
+        self.gridLayout_13.addWidget(self.sectionModification_2, 0, 1, 1, 1)
+
+        self.horizontalSpacer_13 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_13.addItem(self.horizontalSpacer_13, 0, 0, 1, 1)
+
+        self.horizontalSpacer_14 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_13.addItem(self.horizontalSpacer_14, 0, 4, 1, 1)
+
+        self.tabWidget_2.addTab(self.tab_5, "")
+        self.tab_6 = QWidget()
+        self.tab_6.setObjectName(u"tab_6")
+        self.gridLayout_15 = QGridLayout(self.tab_6)
+        self.gridLayout_15.setObjectName(u"gridLayout_15")
+        self.horizontalSpacer_15 = QSpacerItem(231, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_15.addItem(self.horizontalSpacer_15, 0, 0, 1, 1)
+
+        self.itemsModification_2 = QGroupBox(self.tab_6)
+        self.itemsModification_2.setObjectName(u"itemsModification_2")
+        sizePolicy.setHeightForWidth(self.itemsModification_2.sizePolicy().hasHeightForWidth())
+        self.itemsModification_2.setSizePolicy(sizePolicy)
+        self.gridLayout_14 = QGridLayout(self.itemsModification_2)
+        self.gridLayout_14.setObjectName(u"gridLayout_14")
+        self.priceImpIt = QPushButton(self.itemsModification_2)
+        self.priceImpIt.setObjectName(u"priceImpIt")
+
+        self.gridLayout_14.addWidget(self.priceImpIt, 6, 0, 1, 2)
+
+        self.itemsList_2 = QComboBox(self.itemsModification_2)
+        self.itemsList_2.setObjectName(u"itemsList_2")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.itemsList_2.sizePolicy().hasHeightForWidth())
+        self.itemsList_2.setSizePolicy(sizePolicy1)
+        self.itemsList_2.setModelColumn(0)
+
+        self.gridLayout_14.addWidget(self.itemsList_2, 1, 0, 1, 2)
+
+        self.addedItems_2 = QTextEdit(self.itemsModification_2)
+        self.addedItems_2.setObjectName(u"addedItems_2")
+
+        self.gridLayout_14.addWidget(self.addedItems_2, 5, 0, 1, 2)
+
+        self.labelItems_2 = QLabel(self.itemsModification_2)
+        self.labelItems_2.setObjectName(u"labelItems_2")
+        self.labelItems_2.setFont(font1)
+
+        self.gridLayout_14.addWidget(self.labelItems_2, 0, 0, 1, 2, Qt.AlignHCenter)
+
+        self.addItem_2 = QPushButton(self.itemsModification_2)
+        self.addItem_2.setObjectName(u"addItem_2")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.addItem_2.sizePolicy().hasHeightForWidth())
+        self.addItem_2.setSizePolicy(sizePolicy2)
+
+        self.gridLayout_14.addWidget(self.addItem_2, 3, 0, 1, 2)
+
+
+        self.gridLayout_15.addWidget(self.itemsModification_2, 0, 1, 2, 1)
+
+        self.horizontalSpacer_16 = QSpacerItem(227, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_15.addItem(self.horizontalSpacer_16, 0, 2, 1, 1)
+
+        self.tabWidget_2.addTab(self.tab_6, "")
+        self.tab_7 = QWidget()
+        self.tab_7.setObjectName(u"tab_7")
+        self.gridLayout_17 = QGridLayout(self.tab_7)
+        self.gridLayout_17.setObjectName(u"gridLayout_17")
+        self.horizontalSpacer_17 = QSpacerItem(231, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_17.addItem(self.horizontalSpacer_17, 0, 0, 1, 1)
+
+        self.optionSetModification_2 = QGroupBox(self.tab_7)
+        self.optionSetModification_2.setObjectName(u"optionSetModification_2")
+        sizePolicy.setHeightForWidth(self.optionSetModification_2.sizePolicy().hasHeightForWidth())
+        self.optionSetModification_2.setSizePolicy(sizePolicy)
+        self.gridLayout_16 = QGridLayout(self.optionSetModification_2)
+        self.gridLayout_16.setObjectName(u"gridLayout_16")
+        self.addOS_2 = QPushButton(self.optionSetModification_2)
+        self.addOS_2.setObjectName(u"addOS_2")
+
+        self.gridLayout_16.addWidget(self.addOS_2, 3, 0, 1, 2)
+
+        self.osList_2 = QComboBox(self.optionSetModification_2)
+        self.osList_2.setObjectName(u"osList_2")
+
+        self.gridLayout_16.addWidget(self.osList_2, 1, 0, 1, 2)
+
+        self.labelOS_2 = QLabel(self.optionSetModification_2)
+        self.labelOS_2.setObjectName(u"labelOS_2")
+
+        self.gridLayout_16.addWidget(self.labelOS_2, 0, 0, 1, 2, Qt.AlignHCenter)
+
+        self.priceImpOS = QPushButton(self.optionSetModification_2)
+        self.priceImpOS.setObjectName(u"priceImpOS")
+
+        self.gridLayout_16.addWidget(self.priceImpOS, 5, 0, 1, 2)
+
+        self.optionsList_2 = QComboBox(self.optionSetModification_2)
+        self.optionsList_2.setObjectName(u"optionsList_2")
+
+        self.gridLayout_16.addWidget(self.optionsList_2, 2, 0, 1, 2)
+
+        self.addedOS_2 = QTextEdit(self.optionSetModification_2)
+        self.addedOS_2.setObjectName(u"addedOS_2")
+
+        self.gridLayout_16.addWidget(self.addedOS_2, 4, 0, 1, 2)
+
+
+        self.gridLayout_17.addWidget(self.optionSetModification_2, 0, 1, 1, 1)
+
+        self.horizontalSpacer_18 = QSpacerItem(231, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_17.addItem(self.horizontalSpacer_18, 0, 2, 1, 1)
+
+        self.tabWidget_2.addTab(self.tab_7, "")
+        self.tab_8 = QWidget()
+        self.tab_8.setObjectName(u"tab_8")
+        self.gridLayout_19 = QGridLayout(self.tab_8)
+        self.gridLayout_19.setObjectName(u"gridLayout_19")
+        self.horizontalSpacer_19 = QSpacerItem(231, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_19.addItem(self.horizontalSpacer_19, 0, 0, 1, 1)
+
+        self.groupBox_2 = QGroupBox(self.tab_8)
+        self.groupBox_2.setObjectName(u"groupBox_2")
+        self.gridLayout_18 = QGridLayout(self.groupBox_2)
+        self.gridLayout_18.setObjectName(u"gridLayout_18")
+        self.leSmartSearch_2 = QLineEdit(self.groupBox_2)
+        self.leSmartSearch_2.setObjectName(u"leSmartSearch_2")
+
+        self.gridLayout_18.addWidget(self.leSmartSearch_2, 1, 0, 1, 1)
+
+        self.labelSmartSearch_2 = QLabel(self.groupBox_2)
+        self.labelSmartSearch_2.setObjectName(u"labelSmartSearch_2")
+
+        self.gridLayout_18.addWidget(self.labelSmartSearch_2, 0, 0, 1, 1, Qt.AlignHCenter)
+
+        self.addedSS_2 = QTextEdit(self.groupBox_2)
+        self.addedSS_2.setObjectName(u"addedSS_2")
+
+        self.gridLayout_18.addWidget(self.addedSS_2, 4, 0, 1, 1)
+
+        self.priceImpSmartSearch = QPushButton(self.groupBox_2)
+        self.priceImpSmartSearch.setObjectName(u"priceImpSmartSearch")
+
+        self.gridLayout_18.addWidget(self.priceImpSmartSearch, 5, 0, 1, 1)
+
+        self.addSmartSearch_2 = QPushButton(self.groupBox_2)
+        self.addSmartSearch_2.setObjectName(u"addSmartSearch_2")
+
+        self.gridLayout_18.addWidget(self.addSmartSearch_2, 3, 0, 1, 1)
+
+        self.smartSearchList_2 = QComboBox(self.groupBox_2)
+        self.smartSearchList_2.setObjectName(u"smartSearchList_2")
+
+        self.gridLayout_18.addWidget(self.smartSearchList_2, 2, 0, 1, 1)
+
+
+        self.gridLayout_19.addWidget(self.groupBox_2, 0, 1, 1, 1)
+
+        self.horizontalSpacer_20 = QSpacerItem(231, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_19.addItem(self.horizontalSpacer_20, 0, 2, 1, 1)
+
+        self.tabWidget_2.addTab(self.tab_8, "")
+
+        self.gridLayout_10.addWidget(self.tabWidget_2, 4, 0, 1, 7)
+
+        self.line_2 = QFrame(self.pricePage)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setFrameShape(QFrame.HLine)
+        self.line_2.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout_10.addWidget(self.line_2, 3, 0, 1, 7)
+
+        self.leIncrease = QLineEdit(self.pricePage)
+        self.leIncrease.setObjectName(u"leIncrease")
+
+        self.gridLayout_10.addWidget(self.leIncrease, 1, 4, 1, 2)
+
+        self.priceListSelected = QComboBox(self.pricePage)
+        self.priceListSelected.addItem("")
+        self.priceListSelected.addItem("")
+        self.priceListSelected.setObjectName(u"priceListSelected")
+
+        self.gridLayout_10.addWidget(self.priceListSelected, 1, 0, 1, 3)
+
+        self.price = QLabel(self.pricePage)
+        self.price.setObjectName(u"price")
+
+        self.gridLayout_10.addWidget(self.price, 2, 2, 1, 4)
+
+        self.stackedWidget.addWidget(self.pricePage)
+        self.taxPage = QWidget()
+        self.taxPage.setObjectName(u"taxPage")
+        self.gridLayout_11 = QGridLayout(self.taxPage)
+        self.gridLayout_11.setObjectName(u"gridLayout_11")
+        self.taxList = QComboBox(self.taxPage)
+        self.taxList.setObjectName(u"taxList")
+
+        self.gridLayout_11.addWidget(self.taxList, 2, 1, 1, 1)
+
+        self.tabWidget = QTabWidget(self.taxPage)
         self.tabWidget.setObjectName(u"tabWidget")
         self.tabWidget.setFocusPolicy(Qt.TabFocus)
         self.tabWidget.setContextMenuPolicy(Qt.DefaultContextMenu)
@@ -71,9 +350,6 @@ class Ui_MainWindow(object):
         self.gridLayout_8.setObjectName(u"gridLayout_8")
         self.sectionModification = QGroupBox(self.tab)
         self.sectionModification.setObjectName(u"sectionModification")
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sectionModification.sizePolicy().hasHeightForWidth())
         self.sectionModification.setSizePolicy(sizePolicy)
         self.gridLayout_2 = QGridLayout(self.sectionModification)
@@ -101,23 +377,20 @@ class Ui_MainWindow(object):
 
         self.labelSection = QLabel(self.sectionModification)
         self.labelSection.setObjectName(u"labelSection")
-        font1 = QFont()
-        font1.setFamilies([u"Yu Gothic"])
-        font1.setPointSize(10)
         self.labelSection.setFont(font1)
 
         self.gridLayout_2.addWidget(self.labelSection, 0, 1, 1, 2, Qt.AlignHCenter)
 
 
-        self.gridLayout_8.addWidget(self.sectionModification, 0, 1, 1, 1)
+        self.gridLayout_8.addWidget(self.sectionModification, 0, 2, 1, 1)
 
         self.horizontalSpacer_8 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.gridLayout_8.addItem(self.horizontalSpacer_8, 0, 0, 1, 1)
 
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout_8.addItem(self.horizontalSpacer, 0, 2, 1, 1)
+        self.gridLayout_8.addItem(self.horizontalSpacer_6, 0, 4, 1, 1)
 
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QWidget()
@@ -137,9 +410,6 @@ class Ui_MainWindow(object):
 
         self.itemsList = QComboBox(self.itemsModification)
         self.itemsList.setObjectName(u"itemsList")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.itemsList.sizePolicy().hasHeightForWidth())
         self.itemsList.setSizePolicy(sizePolicy1)
         self.itemsList.setModelColumn(0)
@@ -159,9 +429,6 @@ class Ui_MainWindow(object):
 
         self.addItem = QPushButton(self.itemsModification)
         self.addItem.setObjectName(u"addItem")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.addItem.sizePolicy().hasHeightForWidth())
         self.addItem.setSizePolicy(sizePolicy2)
 
@@ -282,32 +549,36 @@ class Ui_MainWindow(object):
 
         self.tabWidget.addTab(self.tab_4, "")
 
-        self.gridLayout_3.addWidget(self.tabWidget, 3, 0, 1, 3)
+        self.gridLayout_11.addWidget(self.tabWidget, 4, 0, 1, 3)
+
+        self.labelTax = QLabel(self.taxPage)
+        self.labelTax.setObjectName(u"labelTax")
+
+        self.gridLayout_11.addWidget(self.labelTax, 1, 1, 1, 1)
 
         self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout_3.addItem(self.horizontalSpacer_5, 0, 0, 1, 1)
+        self.gridLayout_11.addItem(self.horizontalSpacer_5, 1, 0, 1, 1)
 
-        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout_3.addItem(self.horizontalSpacer_6, 0, 2, 1, 1)
+        self.gridLayout_11.addItem(self.horizontalSpacer, 1, 2, 1, 1)
 
-        self.line = QFrame(self.centralwidget)
+        self.line = QFrame(self.taxPage)
         self.line.setObjectName(u"line")
         self.line.setFrameShape(QFrame.HLine)
         self.line.setFrameShadow(QFrame.Sunken)
 
-        self.gridLayout_3.addWidget(self.line, 2, 0, 1, 3)
+        self.gridLayout_11.addWidget(self.line, 3, 0, 1, 3)
 
-        self.taxList = QComboBox(self.centralwidget)
-        self.taxList.setObjectName(u"taxList")
+        self.stackedWidget.addWidget(self.taxPage)
 
-        self.gridLayout_3.addWidget(self.taxList, 1, 1, 1, 1)
+        self.gridLayout_3.addWidget(self.stackedWidget, 1, 0, 1, 2)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 831, 29))
+        self.menubar.setGeometry(QRect(0, 0, 865, 29))
         self.menuFile = QMenu(self.menubar)
         self.menuFile.setObjectName(u"menuFile")
         self.menuEdit = QMenu(self.menubar)
@@ -318,7 +589,6 @@ class Ui_MainWindow(object):
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
-        QWidget.setTabOrder(self.taxList, self.tabWidget)
         QWidget.setTabOrder(self.tabWidget, self.sectionList)
         QWidget.setTabOrder(self.sectionList, self.addSection)
         QWidget.setTabOrder(self.addSection, self.addedSections)
@@ -348,6 +618,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
+        self.stackedWidget.setCurrentIndex(0)
+        self.tabWidget_2.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
 
 
@@ -376,7 +648,34 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(shortcut)
         self.actionRemove_Tax_from_All_Sections.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+R", None))
 #endif // QT_CONFIG(shortcut)
-        self.labelTax.setText(QCoreApplication.translate("MainWindow", u"Please Select Tax Values", None))
+        self.TAXBUTTON.setText(QCoreApplication.translate("MainWindow", u"Tax Modifications", None))
+        self.PRICEBUTTON.setText(QCoreApplication.translate("MainWindow", u"Price Modifications", None))
+        self.sectionModification_2.setTitle(QCoreApplication.translate("MainWindow", u"Section Modifications", None))
+        self.addSection_2.setText(QCoreApplication.translate("MainWindow", u"Add Section", None))
+        self.priceImpSec.setText(QCoreApplication.translate("MainWindow", u"Implement Price", None))
+        self.labelSection_2.setText(QCoreApplication.translate("MainWindow", u"Select the Sections to Modify", None))
+        self.modOS.setText(QCoreApplication.translate("MainWindow", u"Modify OS", None))
+        self.modMO.setText(QCoreApplication.translate("MainWindow", u"Modify MO", None))
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_5), QCoreApplication.translate("MainWindow", u"Section Modifications", None))
+        self.itemsModification_2.setTitle(QCoreApplication.translate("MainWindow", u"Item Modifications", None))
+        self.priceImpIt.setText(QCoreApplication.translate("MainWindow", u"Implement Price", None))
+        self.labelItems_2.setText(QCoreApplication.translate("MainWindow", u"Select the Items to Modify", None))
+        self.addItem_2.setText(QCoreApplication.translate("MainWindow", u"Add Item", None))
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_6), QCoreApplication.translate("MainWindow", u"Item Modifications", None))
+        self.optionSetModification_2.setTitle(QCoreApplication.translate("MainWindow", u"Option Set Modifications", None))
+        self.addOS_2.setText(QCoreApplication.translate("MainWindow", u"Add Option", None))
+        self.labelOS_2.setText(QCoreApplication.translate("MainWindow", u"Select the OS to Modify", None))
+        self.priceImpOS.setText(QCoreApplication.translate("MainWindow", u"Implement Price", None))
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_7), QCoreApplication.translate("MainWindow", u"Option Set Modifications", None))
+        self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Smart Search", None))
+        self.labelSmartSearch_2.setText(QCoreApplication.translate("MainWindow", u"Smart Search", None))
+        self.priceImpSmartSearch.setText(QCoreApplication.translate("MainWindow", u"Implement Price", None))
+        self.addSmartSearch_2.setText(QCoreApplication.translate("MainWindow", u"Add Item", None))
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_8), QCoreApplication.translate("MainWindow", u"Smart Search", None))
+        self.priceListSelected.setItemText(0, QCoreApplication.translate("MainWindow", u"Increase or Decrease %", None))
+        self.priceListSelected.setItemText(1, QCoreApplication.translate("MainWindow", u"Increase or Decrease Fixed Amount", None))
+
+        self.price.setText("")
         self.sectionModification.setTitle(QCoreApplication.translate("MainWindow", u"Section Modifications", None))
         self.addSection.setText(QCoreApplication.translate("MainWindow", u"Add Section", None))
         self.taxImpSec.setText(QCoreApplication.translate("MainWindow", u"Implement Tax", None))
@@ -397,6 +696,7 @@ class Ui_MainWindow(object):
         self.taxImpSmartSearch.setText(QCoreApplication.translate("MainWindow", u"Implement Tax", None))
         self.addSmartSearch.setText(QCoreApplication.translate("MainWindow", u"Add Item", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("MainWindow", u"Smart Search", None))
+        self.labelTax.setText(QCoreApplication.translate("MainWindow", u"Please Select Tax Values", None))
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
         self.menuEdit.setTitle(QCoreApplication.translate("MainWindow", u"Edit", None))
         self.menuTax_Options.setTitle(QCoreApplication.translate("MainWindow", u"Tax Options", None))
