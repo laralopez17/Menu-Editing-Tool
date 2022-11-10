@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(865, 742)
+        MainWindow.resize(860, 734)
         font = QFont()
         font.setFamilies([u"Yu Gothic"])
         font.setPointSize(9)
@@ -74,6 +74,18 @@ class Ui_MainWindow(object):
         self.pricePage.setObjectName(u"pricePage")
         self.gridLayout_10 = QGridLayout(self.pricePage)
         self.gridLayout_10.setObjectName(u"gridLayout_10")
+        self.leIncrease = QLineEdit(self.pricePage)
+        self.leIncrease.setObjectName(u"leIncrease")
+
+        self.gridLayout_10.addWidget(self.leIncrease, 1, 4, 1, 2)
+
+        self.line_2 = QFrame(self.pricePage)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setFrameShape(QFrame.HLine)
+        self.line_2.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout_10.addWidget(self.line_2, 3, 0, 1, 7)
+
         self.tabWidget_2 = QTabWidget(self.pricePage)
         self.tabWidget_2.setObjectName(u"tabWidget_2")
         self.tab_5 = QWidget()
@@ -121,11 +133,13 @@ class Ui_MainWindow(object):
 
         self.modOS = QCheckBox(self.sectionModification_2)
         self.modOS.setObjectName(u"modOS")
+        self.modOS.setCheckable(True)
 
         self.gridLayout_12.addWidget(self.modOS, 2, 2, 1, 1)
 
         self.modMO = QCheckBox(self.sectionModification_2)
         self.modMO.setObjectName(u"modMO")
+        self.modMO.setCheckable(True)
         self.modMO.setChecked(True)
 
         self.gridLayout_12.addWidget(self.modMO, 2, 1, 1, 1)
@@ -192,6 +206,17 @@ class Ui_MainWindow(object):
         self.addItem_2.setSizePolicy(sizePolicy2)
 
         self.gridLayout_14.addWidget(self.addItem_2, 3, 0, 1, 2)
+
+        self.modMO1 = QCheckBox(self.itemsModification_2)
+        self.modMO1.setObjectName(u"modMO1")
+        self.modMO1.setChecked(True)
+
+        self.gridLayout_14.addWidget(self.modMO1, 2, 0, 1, 1)
+
+        self.modSO1 = QCheckBox(self.itemsModification_2)
+        self.modSO1.setObjectName(u"modSO1")
+
+        self.gridLayout_14.addWidget(self.modSO1, 2, 1, 1, 1)
 
 
         self.gridLayout_15.addWidget(self.itemsModification_2, 0, 1, 2, 1)
@@ -265,35 +290,47 @@ class Ui_MainWindow(object):
         self.groupBox_2.setObjectName(u"groupBox_2")
         self.gridLayout_18 = QGridLayout(self.groupBox_2)
         self.gridLayout_18.setObjectName(u"gridLayout_18")
-        self.leSmartSearch_2 = QLineEdit(self.groupBox_2)
-        self.leSmartSearch_2.setObjectName(u"leSmartSearch_2")
+        self.modMO2 = QCheckBox(self.groupBox_2)
+        self.modMO2.setObjectName(u"modMO2")
+        self.modMO2.setCheckable(True)
+        self.modMO2.setChecked(True)
 
-        self.gridLayout_18.addWidget(self.leSmartSearch_2, 1, 0, 1, 1)
+        self.gridLayout_18.addWidget(self.modMO2, 3, 0, 1, 1)
 
-        self.labelSmartSearch_2 = QLabel(self.groupBox_2)
-        self.labelSmartSearch_2.setObjectName(u"labelSmartSearch_2")
+        self.modSO2 = QCheckBox(self.groupBox_2)
+        self.modSO2.setObjectName(u"modSO2")
 
-        self.gridLayout_18.addWidget(self.labelSmartSearch_2, 0, 0, 1, 1, Qt.AlignHCenter)
-
-        self.addedSS_2 = QTextEdit(self.groupBox_2)
-        self.addedSS_2.setObjectName(u"addedSS_2")
-
-        self.gridLayout_18.addWidget(self.addedSS_2, 4, 0, 1, 1)
-
-        self.priceImpSmartSearch = QPushButton(self.groupBox_2)
-        self.priceImpSmartSearch.setObjectName(u"priceImpSmartSearch")
-
-        self.gridLayout_18.addWidget(self.priceImpSmartSearch, 5, 0, 1, 1)
-
-        self.addSmartSearch_2 = QPushButton(self.groupBox_2)
-        self.addSmartSearch_2.setObjectName(u"addSmartSearch_2")
-
-        self.gridLayout_18.addWidget(self.addSmartSearch_2, 3, 0, 1, 1)
+        self.gridLayout_18.addWidget(self.modSO2, 3, 1, 1, 1)
 
         self.smartSearchList_2 = QComboBox(self.groupBox_2)
         self.smartSearchList_2.setObjectName(u"smartSearchList_2")
 
-        self.gridLayout_18.addWidget(self.smartSearchList_2, 2, 0, 1, 1)
+        self.gridLayout_18.addWidget(self.smartSearchList_2, 2, 0, 1, 2)
+
+        self.leSmartSearch_2 = QLineEdit(self.groupBox_2)
+        self.leSmartSearch_2.setObjectName(u"leSmartSearch_2")
+
+        self.gridLayout_18.addWidget(self.leSmartSearch_2, 1, 0, 1, 2)
+
+        self.labelSmartSearch_2 = QLabel(self.groupBox_2)
+        self.labelSmartSearch_2.setObjectName(u"labelSmartSearch_2")
+
+        self.gridLayout_18.addWidget(self.labelSmartSearch_2, 0, 0, 1, 2, Qt.AlignHCenter)
+
+        self.addSmartSearch_2 = QPushButton(self.groupBox_2)
+        self.addSmartSearch_2.setObjectName(u"addSmartSearch_2")
+
+        self.gridLayout_18.addWidget(self.addSmartSearch_2, 6, 0, 1, 2)
+
+        self.addedSS_2 = QTextEdit(self.groupBox_2)
+        self.addedSS_2.setObjectName(u"addedSS_2")
+
+        self.gridLayout_18.addWidget(self.addedSS_2, 7, 0, 1, 2)
+
+        self.priceImpSmartSearch = QPushButton(self.groupBox_2)
+        self.priceImpSmartSearch.setObjectName(u"priceImpSmartSearch")
+
+        self.gridLayout_18.addWidget(self.priceImpSmartSearch, 8, 0, 1, 2)
 
 
         self.gridLayout_19.addWidget(self.groupBox_2, 0, 1, 1, 1)
@@ -306,19 +343,8 @@ class Ui_MainWindow(object):
 
         self.gridLayout_10.addWidget(self.tabWidget_2, 4, 0, 1, 7)
 
-        self.line_2 = QFrame(self.pricePage)
-        self.line_2.setObjectName(u"line_2")
-        self.line_2.setFrameShape(QFrame.HLine)
-        self.line_2.setFrameShadow(QFrame.Sunken)
-
-        self.gridLayout_10.addWidget(self.line_2, 3, 0, 1, 7)
-
-        self.leIncrease = QLineEdit(self.pricePage)
-        self.leIncrease.setObjectName(u"leIncrease")
-
-        self.gridLayout_10.addWidget(self.leIncrease, 1, 4, 1, 2)
-
         self.priceListSelected = QComboBox(self.pricePage)
+        self.priceListSelected.addItem("")
         self.priceListSelected.addItem("")
         self.priceListSelected.addItem("")
         self.priceListSelected.setObjectName(u"priceListSelected")
@@ -329,6 +355,11 @@ class Ui_MainWindow(object):
         self.price.setObjectName(u"price")
 
         self.gridLayout_10.addWidget(self.price, 2, 2, 1, 4)
+
+        self.labelInfo = QLabel(self.pricePage)
+        self.labelInfo.setObjectName(u"labelInfo")
+
+        self.gridLayout_10.addWidget(self.labelInfo, 2, 0, 1, 1)
 
         self.stackedWidget.addWidget(self.pricePage)
         self.taxPage = QWidget()
@@ -578,7 +609,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 865, 29))
+        self.menubar.setGeometry(QRect(0, 0, 860, 29))
         self.menuFile = QMenu(self.menubar)
         self.menuFile.setObjectName(u"menuFile")
         self.menuEdit = QMenu(self.menubar)
@@ -661,6 +692,8 @@ class Ui_MainWindow(object):
         self.priceImpIt.setText(QCoreApplication.translate("MainWindow", u"Implement Price", None))
         self.labelItems_2.setText(QCoreApplication.translate("MainWindow", u"Select the Items to Modify", None))
         self.addItem_2.setText(QCoreApplication.translate("MainWindow", u"Add Item", None))
+        self.modMO1.setText(QCoreApplication.translate("MainWindow", u"Modify MO", None))
+        self.modSO1.setText(QCoreApplication.translate("MainWindow", u"Modify OS", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_6), QCoreApplication.translate("MainWindow", u"Item Modifications", None))
         self.optionSetModification_2.setTitle(QCoreApplication.translate("MainWindow", u"Option Set Modifications", None))
         self.addOS_2.setText(QCoreApplication.translate("MainWindow", u"Add Option", None))
@@ -668,14 +701,18 @@ class Ui_MainWindow(object):
         self.priceImpOS.setText(QCoreApplication.translate("MainWindow", u"Implement Price", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_7), QCoreApplication.translate("MainWindow", u"Option Set Modifications", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Smart Search", None))
+        self.modMO2.setText(QCoreApplication.translate("MainWindow", u"Modify MO", None))
+        self.modSO2.setText(QCoreApplication.translate("MainWindow", u"Modify OS", None))
         self.labelSmartSearch_2.setText(QCoreApplication.translate("MainWindow", u"Smart Search", None))
-        self.priceImpSmartSearch.setText(QCoreApplication.translate("MainWindow", u"Implement Price", None))
         self.addSmartSearch_2.setText(QCoreApplication.translate("MainWindow", u"Add Item", None))
+        self.priceImpSmartSearch.setText(QCoreApplication.translate("MainWindow", u"Implement Price", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_8), QCoreApplication.translate("MainWindow", u"Smart Search", None))
-        self.priceListSelected.setItemText(0, QCoreApplication.translate("MainWindow", u"Increase or Decrease %", None))
-        self.priceListSelected.setItemText(1, QCoreApplication.translate("MainWindow", u"Increase or Decrease Fixed Amount", None))
+        self.priceListSelected.setItemText(0, QCoreApplication.translate("MainWindow", u"Change Price", None))
+        self.priceListSelected.setItemText(1, QCoreApplication.translate("MainWindow", u"Increase or Decrease %", None))
+        self.priceListSelected.setItemText(2, QCoreApplication.translate("MainWindow", u"Increase or Decrease Fixed Amount", None))
 
         self.price.setText("")
+        self.labelInfo.setText("")
         self.sectionModification.setTitle(QCoreApplication.translate("MainWindow", u"Section Modifications", None))
         self.addSection.setText(QCoreApplication.translate("MainWindow", u"Add Section", None))
         self.taxImpSec.setText(QCoreApplication.translate("MainWindow", u"Implement Tax", None))

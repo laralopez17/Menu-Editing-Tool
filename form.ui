@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>865</width>
-    <height>742</height>
+    <width>860</width>
+    <height>734</height>
    </rect>
   </property>
   <property name="font">
@@ -50,14 +50,24 @@
        <enum>QFrame::Plain</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="pricePage">
        <layout class="QGridLayout" name="gridLayout_10">
+        <item row="1" column="4" colspan="2">
+         <widget class="QLineEdit" name="leIncrease"/>
+        </item>
+        <item row="3" column="0" colspan="7">
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
         <item row="4" column="0" colspan="7">
          <widget class="QTabWidget" name="tabWidget_2">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab_5">
            <attribute name="title">
@@ -118,12 +128,18 @@
                  <property name="text">
                   <string>Modify OS</string>
                  </property>
+                 <property name="checkable">
+                  <bool>true</bool>
+                 </property>
                 </widget>
                </item>
                <item row="2" column="1">
                 <widget class="QCheckBox" name="modMO">
                  <property name="text">
                   <string>Modify MO</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
                  </property>
                  <property name="checked">
                   <bool>true</bool>
@@ -253,7 +269,7 @@
                <item row="2" column="1">
                 <widget class="QCheckBox" name="modSO1">
                  <property name="text">
-                  <string>Modify SO</string>
+                  <string>Modify OS</string>
                  </property>
                 </widget>
                </item>
@@ -377,35 +393,55 @@
                <string>Smart Search</string>
               </property>
               <layout class="QGridLayout" name="gridLayout_18">
-               <item row="1" column="0">
+               <item row="3" column="0">
+                <widget class="QCheckBox" name="modMO2">
+                 <property name="text">
+                  <string>Modify MO</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QCheckBox" name="modSO2">
+                 <property name="text">
+                  <string>Modify OS</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="2">
+                <widget class="QComboBox" name="smartSearchList_2"/>
+               </item>
+               <item row="1" column="0" colspan="2">
                 <widget class="QLineEdit" name="leSmartSearch_2"/>
                </item>
-               <item row="0" column="0" alignment="Qt::AlignHCenter">
+               <item row="0" column="0" colspan="2" alignment="Qt::AlignHCenter">
                 <widget class="QLabel" name="labelSmartSearch_2">
                  <property name="text">
                   <string>Smart Search</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="0">
-                <widget class="QTextEdit" name="addedSS_2"/>
-               </item>
-               <item row="5" column="0">
-                <widget class="QPushButton" name="priceImpSmartSearch">
-                 <property name="text">
-                  <string>Implement Price</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
+               <item row="6" column="0" colspan="2">
                 <widget class="QPushButton" name="addSmartSearch_2">
                  <property name="text">
                   <string>Add Item</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QComboBox" name="smartSearchList_2"/>
+               <item row="7" column="0" colspan="2">
+                <widget class="QTextEdit" name="addedSS_2"/>
+               </item>
+               <item row="8" column="0" colspan="2">
+                <widget class="QPushButton" name="priceImpSmartSearch">
+                 <property name="text">
+                  <string>Implement Price</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -427,18 +463,13 @@
           </widget>
          </widget>
         </item>
-        <item row="3" column="0" colspan="7">
-         <widget class="Line" name="line_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="4" colspan="2">
-         <widget class="QLineEdit" name="leIncrease"/>
-        </item>
         <item row="1" column="0" colspan="3">
          <widget class="QComboBox" name="priceListSelected">
+          <item>
+           <property name="text">
+            <string>Change Price</string>
+           </property>
+          </item>
           <item>
            <property name="text">
             <string>Increase or Decrease %</string>
@@ -453,6 +484,13 @@
         </item>
         <item row="2" column="2" colspan="4">
          <widget class="QLabel" name="price">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="labelInfo">
           <property name="text">
            <string/>
           </property>
@@ -861,7 +899,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>865</width>
+     <width>860</width>
      <height>29</height>
     </rect>
    </property>

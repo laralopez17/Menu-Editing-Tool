@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QFileDialog, QMessageBox, QMainWindow, QComboBox
+from PySide6.QtWidgets import QFileDialog, QMessageBox, QMainWindow
 from PySide6.QtGui import QIcon, QDoubleValidator
 from jsonSection import jsonSection
 
@@ -13,10 +13,10 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.setWindowTitle('Tax Editing Tool')
+        self.setWindowTitle('Menu Editing Tool')
         self.setWindowIcon(QIcon('.\images\iconoFlipdish.png'))
 
-        self.ui.stackedWidget.hide()
+        #self.ui.stackedWidget.hide()
         self.ui.TAXBUTTON.clicked.connect(self.clickedTAXBUTTON)
         self.ui.PRICEBUTTON.clicked.connect(self.clickedPRICEBUTTON)
 
@@ -41,6 +41,8 @@ class MainWindow(QMainWindow):
         self.ui.taxImpIt.clicked.connect(self.clickedItemImp)
 
         self.ui.addItem_2.clicked.connect(self.slot_addedItem2)
+        self.ui.priceImpIt.clicked.connect(self.clickedItemImp2)
+
         global osFjson
         osFjson = list()
 
@@ -70,6 +72,7 @@ class MainWindow(QMainWindow):
 
         self.ui.osList_2.activated.connect(self.setOptionList2)
         self.ui.addOS_2.clicked.connect(self.slot_addedOsOption2)
+        self.ui.priceImpOS.clicked.connect(self.clickedOSImp2)
 
         global smartSearch
         smartSearch = list()
@@ -82,8 +85,13 @@ class MainWindow(QMainWindow):
         self.ui.leSmartSearch.editingFinished.connect(self.slot_setSSList)
         self.ui.addSmartSearch.clicked.connect(self.slot_addedSS)
         self.ui.taxImpSmartSearch.clicked.connect(self.clickedSSImp)
+
+        self.ui.leSmartSearch_2.editingFinished.connect(self.slot_setSSList2)
+        self.ui.addSmartSearch_2.clicked.connect(self.slot_addedSS2)
+        self.ui.priceImpSmartSearch.clicked.connect(self.clickedSSImp2)
+
         self.ui.priceListSelected.activated.connect(self.indexHasChanged)
-        self.ui.leIncrease.setValidator(QDoubleValidator(-99.99,99.99,2))
+        self.ui.leIncrease.setValidator(QDoubleValidator(0,10000000,2))
         self.ui.leIncrease.editingFinished.connect(self.slot_Increase)
 
         self.ui.priceImpSec.clicked.connect(self.clickedSectionImp2)
@@ -120,9 +128,15 @@ class MainWindow(QMainWindow):
             self.ui.taxList.clear()
             self.ui.sectionList.clear()
             self.ui.itemsList.clear()
+            self.ui.itemsList_2.clear()
             self.ui.osList.clear()
+            self.ui.osList_2.clear()
             self.ui.optionsList.clear()
+            self.ui.optionsList_2.clear()
             self.ui.addedOS.clear()
+            self.ui.addedOS_2.clear()
+            self.ui.addedItems_2.clear()
+            self.ui.addedItems.clear()
             pass
         else:
             file = file1
@@ -133,6 +147,9 @@ class MainWindow(QMainWindow):
             self.setItemsList()
             self.setOSList()
             self.ui.addedOS.clear()
+            self.ui.addedOS_2.clear()
+            self.ui.addedItems_2.clear()
+            self.ui.addedItems.clear()
 
 #closes the program
     def closeEvent(self, event):
@@ -178,10 +195,11 @@ class MainWindow(QMainWindow):
                 self.ui.itemsList.addItem(section + ": " + items[i])
                 self.ui.itemsList_2.addItem(section + ": " + items[i])
 
-#sets the list of OS available on the menu321654
+#sets the list of OS available on the menu
     def setOSList(self):
         global osFjson
         self.ui.osList.clear()
+        self.ui.osList_2.clear()
         osFjson = jsonSection.slot_mostrarOS(jsonSection,datos)
         os = ""
         osOp = list()
@@ -201,6 +219,7 @@ class MainWindow(QMainWindow):
                 self.ui.osList.addItem(os)
                 self.ui.osList_2.addItem(os)
                 self.setOptionList()
+                self.setOptionList2()
             osOp.clear()
 
 #sets the list of options that are on each OS on the menu
@@ -295,6 +314,36 @@ class MainWindow(QMainWindow):
             self.ui.smartSearchList.addItem(smartSearch[i])
         self.ui.leSmartSearch.clear()
 
+
+#sets the list of options and items that matches the search
+    def slot_setSSList2(self):
+        self.ui.smartSearchList_2.clear()
+        smartSearch.clear()
+        textito = ""
+        textito = self.ui.leSmartSearch_2.text()
+        for j in range(0,len(datos["MenuSections"])):
+            for k in range(0,len(datos["MenuSections"][j]["MenuItems"])):
+                itemsSS = datos["MenuSections"][j]["MenuItems"][k]["Name"]
+                if textito.lower() in ascii(datos["MenuSections"][j]["MenuItems"][k]["Name"]).lower():
+                    if itemsSS not in smartSearch:
+                        smartSearch.append(itemsSS)
+                        if textito not in text:
+                            text.append(textito)
+                if len(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"]) == 0:
+                    pass
+                else:
+                    for l in range(0,len(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"])):
+                        for m in range(0,len(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"])):
+                            opSS = datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name']
+                            if textito.lower() in ascii(datos["MenuSections"][j]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name']).lower() and opSS not in smartSearch:
+                                smartSearch.append(opSS)
+                                if textito not in text:
+                                    text.append(textito)
+        if len(smartSearch) != 0:
+            smartSearch.insert(0,"Change All")
+        for i in range(0,len(smartSearch)):
+            self.ui.smartSearchList_2.addItem(smartSearch[i])
+        self.ui.leSmartSearch_2.clear()
 ################################################################################
 ################################################################################
 
@@ -329,7 +378,7 @@ class MainWindow(QMainWindow):
 #shows the items selected on the text edit
     def slot_addedItem(self):
         texto = ''
-        if self.ui.itemsList.currentText() in item:
+        if self.ui.itemsList.currentText() in aux:
             pass
         else:
             aux.append(self.ui.itemsList.currentText())
@@ -343,7 +392,7 @@ class MainWindow(QMainWindow):
 #shows the items selected on the text edit
     def slot_addedItem2(self):
         texto = ''
-        if self.ui.itemsList_2.currentText() in item:
+        if self.ui.itemsList_2.currentText() in aux:
             pass
         else:
             aux.append(self.ui.itemsList_2.currentText())
@@ -363,7 +412,6 @@ class MainWindow(QMainWindow):
                 pass
             else:
                 auxOS.append(self.ui.optionsList.currentText())
-                #if self.ui.osList.currentText() not in auxOSMaster:
                 auxOSMaster.append(self.ui.osList.currentText())
                 for i in range(0,len(auxOS)):
                     texto += auxOSMaster[i] + ": " + auxOS[i]
@@ -372,7 +420,6 @@ class MainWindow(QMainWindow):
                         self.ui.addedOS.setText(texto)
         else:
             auxOS.append(self.ui.optionsList.currentText())
-            #if self.ui.osList.currentText() not in auxOSMaster:
             auxOSMaster.append(self.ui.osList.currentText())
             for i in range(0,len(auxOS)):
                 texto += auxOSMaster[i] + ": " + auxOS[i]
@@ -389,16 +436,14 @@ class MainWindow(QMainWindow):
                 pass
             else:
                 auxOS.append(self.ui.optionsList_2.currentText())
-                #if self.ui.osList.currentText() not in auxOSMaster:
                 auxOSMaster.append(self.ui.osList_2.currentText())
                 for i in range(0,len(auxOS)):
                     texto += auxOSMaster[i] + ": " + auxOS[i]
                     if texto != "":
                         texto += "\n"
-                        self.ui.addedOS.setText(texto)
+                        self.ui.addedOS_2.setText(texto)
         else:
             auxOS.append(self.ui.optionsList_2.currentText())
-            #if self.ui.osList.currentText() not in auxOSMaster:
             auxOSMaster.append(self.ui.osList_2.currentText())
             for i in range(0,len(auxOS)):
                 texto += auxOSMaster[i] + ": " + auxOS[i]
@@ -427,6 +472,26 @@ class MainWindow(QMainWindow):
                     texto += "\n"
                     self.ui.addedSS.setText(texto)
 
+#shows the SS (price) options selected on the text edit
+    def slot_addedSS2(self):
+        texto = ''
+        if self.ui.smartSearchList_2.currentText() in auxSS:
+                pass
+        elif self.ui.smartSearchList_2.currentText() == "Change All":
+            for i in range(1,len(smartSearch)):
+                auxSS.append(smartSearch[i])
+            for i in range(0,len(auxSS)):
+                texto += auxSS[i]
+                if texto != "":
+                    texto += "\n"
+                    self.ui.addedSS_2.setText(texto)
+        else:
+            auxSS.append(self.ui.smartSearchList_2.currentText())
+            for i in range(0,len(auxSS)):
+                texto += auxSS[i]
+                if texto != "":
+                    texto += "\n"
+                    self.ui.addedSS_2.setText(texto)
 
 #button that applies tax to the selected sections
     def clickedSectionImp(self):
@@ -556,22 +621,38 @@ class MainWindow(QMainWindow):
         if self.ui.priceListSelected.currentIndex() == 0:
             self.ui.price.clear()
             self.ui.leIncrease.clear()
-            self.ui.leIncrease.setValidator(QDoubleValidator(-99.99,99.99,2))
-        else:
+            self.ui.leIncrease.setValidator(QDoubleValidator(0,1000000000,2))
+            self.ui.labelInfo.hide()
+        elif self.ui.priceListSelected.currentIndex() == 1:
             self.ui.price.clear()
             self.ui.leIncrease.clear()
-            self.ui.leIncrease.setValidator(QDoubleValidator(-1000000.99,1000000.99,2))
+            self.ui.leIncrease.setValidator(QDoubleValidator(-100,100,2))
+            self.ui.labelInfo.setText("To decrease use '-'")
+            self.ui.labelInfo.show()
+        else :
+            self.ui.price.clear()
+            self.ui.leIncrease.clear()
+            self.ui.leIncrease.setValidator(QDoubleValidator(-10000000,10000000,2))
+            self.ui.labelInfo.setText("To decrease use '-'")
+            self.ui.labelInfo.show()
 
     def slot_Increase(self):
         global price
         if self.ui.priceListSelected.currentIndex() == 0:
+            self.ui.price.setText("The price will be updated to " + self.ui.leIncrease.text())
+            aux = self.ui.leIncrease.text()
+            price = float(aux.replace(",", "."))
+            self.ui.leIncrease.clear()
+        elif self.ui.priceListSelected.currentIndex() == 1:
             self.ui.price.setText("The price will be updated by " + self.ui.leIncrease.text() + "%")
             aux = self.ui.leIncrease.text()
             price = float(aux.replace(",", "."))
+            self.ui.leIncrease.clear()
         else:
             self.ui.price.setText("The price will be updated by " + self.ui.leIncrease.text())
             aux = self.ui.leIncrease.text()
             price = float(aux.replace(",", "."))
+            self.ui.leIncrease.clear()
 
 #button that applies new price to the selected sections
     def clickedSectionImp2(self):
@@ -580,7 +661,11 @@ class MainWindow(QMainWindow):
             QMessageBox.warning(self, 'Warning',
             'You must load a Json File first!',QMessageBox.Ok)
         else:
-            if self.ui.priceListSelected.currentText() == "Increase or Decrease %":
+            if self.ui.priceListSelected.currentText() == "Change Price":
+                jsonSection.slot_changePriceSelectedSections(jsonSection,datos,section,price,self.ui.modMO.isChecked(),self.ui.modOS.isChecked())
+                QMessageBox.information(self, 'Success!',
+                'The selected sections have been updated',QMessageBox.Ok)
+            elif self.ui.priceListSelected.currentText() == "Increase or Decrease %":
                 jsonSection.slot_changePricePercentajeSelectedSections(jsonSection,datos,section,price,self.ui.modMO.isChecked(),self.ui.modOS.isChecked())
                 QMessageBox.information(self, 'Success!',
                 'The selected sections have been updated',QMessageBox.Ok)
@@ -598,12 +683,16 @@ class MainWindow(QMainWindow):
             QMessageBox.warning(self, 'Warning',
             'You must load a Json File first!',QMessageBox.Ok)
         else:
-            if self.ui.priceListSelected.currentText() == "Increase or Decrease %":
-                jsonSection.slot_changePricePercentajeSelectedItems(jsonSection,datos,item,price,self.ui.modMO1.isChecked(),self.ui.modOS1.isChecked())
+            if self.ui.priceListSelected.currentText() == "Change Price":
+                jsonSection.slot_changePriceSelectedItems(jsonSection,datos,item,price,self.ui.modMO1.isChecked(),self.ui.modSO1.isChecked())
+                QMessageBox.information(self, 'Success!',
+                'The selected sections have been updated',QMessageBox.Ok)
+            elif self.ui.priceListSelected.currentText() == "Increase or Decrease %":
+                jsonSection.slot_changePricePercentajeSelectedItems(jsonSection,datos,item,price,self.ui.modMO1.isChecked(),self.ui.modSO1.isChecked())
                 QMessageBox.information(self, 'Success!',
                 'The selected items have been updated',QMessageBox.Ok)
             else:
-                jsonSection.slot_changePriceFixedAmountSelectedItems(jsonSection,datos,item,price,self.ui.modMO1.isChecked(),self.ui.modOS1.isChecked())
+                jsonSection.slot_changePriceFixedAmountSelectedItems(jsonSection,datos,item,price,self.ui.modMO1.isChecked(),self.ui.modSO1.isChecked())
                 QMessageBox.information(self, 'Success!',
                 'The selected items have been updated',QMessageBox.Ok)
         aux.clear()
@@ -617,7 +706,11 @@ class MainWindow(QMainWindow):
             QMessageBox.warning(self, 'Warning',
             'You must load a Json File first!',QMessageBox.Ok)
         else:
-            if self.ui.priceListSelected.currentText() == "Increase or Decrease %":
+            if self.ui.priceListSelected.currentText() == "Change Price":
+                jsonSection.slot_changePriceSelectedOS(jsonSection,datos,auxOS,auxOSMaster,price)
+                QMessageBox.information(self, 'Success!',
+                'The selected sections have been updated',QMessageBox.Ok)
+            elif self.ui.priceListSelected.currentText() == "Increase or Decrease %":
                 jsonSection.slot_changePricePercentajeSelectedOS(jsonSection,datos,auxOS,auxOSMaster,price)
                 QMessageBox.information(self, 'Success!',
                 'The selected sections have been updated',QMessageBox.Ok)
@@ -630,3 +723,26 @@ class MainWindow(QMainWindow):
         auxOS.clear()
         self.ui.addedOS_2.clear()
 
+#button that applies new price to the selected SS items
+    def clickedSSImp2(self):
+        global datos
+        if datos == None:
+            QMessageBox.warning(self, 'Warning',
+            'You must load a Json File first!',QMessageBox.Ok)
+        else:
+            if self.ui.priceListSelected.currentText() == "Change Price":
+                jsonSection.slot_changePriceSelectedSelectedSS(jsonSection,datos,auxSS,text,price,self.ui.modMO2.isChecked(),self.ui.modSO2.isChecked())
+                QMessageBox.information(self, 'Success!',
+                'The selected sections have been updated',QMessageBox.Ok)
+            elif self.ui.priceListSelected.currentText() == "Increase or Decrease %":
+                jsonSection.slot_changePricePercentajeSelectedSS(jsonSection,datos,auxSS,text,price,self.ui.modMO2.isChecked(),self.ui.modSO2.isChecked())
+                QMessageBox.information(self, 'Success!',
+                'The selected sections have been updated',QMessageBox.Ok)
+            else:
+                jsonSection.slot_changePriceFixedAmountSelectedSS(jsonSection,datos,auxSS,text,price,self.ui.modMO2.isChecked(),self.ui.modSO2.isChecked())
+                QMessageBox.information(self, 'Success!',
+                'The selected sections have been updated',QMessageBox.Ok)
+        auxSS.clear()
+        text.clear()
+        self.ui.smartSearchList_2.clear()
+        self.ui.addedSS_2.clear()

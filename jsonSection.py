@@ -245,6 +245,31 @@ class jsonSection:
                                             new_price = float(price) + float(original_price)
                                             datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"] = float("{0:.2f}".format(new_price))
 
+##changes the full prices for the selected sections
+    def slot_changePriceSelectedSections(self,datos,secciones,price,MO,SO):
+        actualizados = list()
+        actualizadosOS = list()
+        for j in range(0,len(secciones)):
+            for i in range(0,len(datos["MenuSections"])):
+                section = datos["MenuSections"][i]["Name"]
+                if section == secciones[j]:
+                    for k in range(0,len(datos["MenuSections"][i]["MenuItems"])):
+                        if datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"] == []:
+                            if datos["MenuSections"][i]["MenuItems"][k]['Name'] not in actualizados:
+                                actualizados.append(datos["MenuSections"][i]["MenuItems"][k]['Name'])
+                                datos["MenuSections"][i]["MenuItems"][k]['Price'] = float("{0:.2f}".format(price))
+                        else:
+                            for l in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"])):
+                                if datos["MenuSections"][i]["MenuItems"][k]['Name'] not in actualizados and datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][0]["IsMasterOptionSet"] != True:
+                                    actualizados.append(datos["MenuSections"][i]["MenuItems"][k]['Name'])
+                                    datos["MenuSections"][i]["MenuItems"][k]['Price'] = float("{0:.2f}".format(price))
+                                actualizadosOS.clear()
+                                if (datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["IsMasterOptionSet"] == True and MO == True) or datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["IsMasterOptionSet"] == False and SO == True:
+                                    for m in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"])):
+                                        if datos["MenuSections"][i]["MenuItems"][k]['Name'] not in actualizadosOS:
+                                            actualizadosOS.append(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name'])
+                                            datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"] = float("{0:.2f}".format(price))
+
 
 #changes the prices for the selected items by percentaje
     def slot_changePricePercentajeSelectedItems(self,datos,itemSelected,price,MO,SO):
@@ -281,13 +306,10 @@ class jsonSection:
                                             new_price = float(increased_price) + float(original_price)
                                             datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"] = float("{0:.2f}".format(new_price))
 
-
-
-
 #changes the prices for the selected items by Fixed Amount
     def slot_changePriceFixedAmountSelectedItems(self,datos,itemSelected,price,MO,SO):
-        actualizados = list()
         original_price = float()
+        actualizados = list()
         actualizadosOS = list()
         for j in range(0,len(itemSelected)):
             for h in range(0,len(datos["MenuSections"])):
@@ -321,3 +343,232 @@ class jsonSection:
                                             original_price = datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"]
                                             new_price = float(price) + float(original_price)
                                             datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"] = float("{0:.2f}".format(new_price))
+
+##changes the full prices for the selected items
+    def slot_changePriceSelectedItems(self,datos,itemSelected,price,MO,SO):
+        actualizados = list()
+        actualizadosOS = list()
+        for j in range(0,len(itemSelected)):
+            for h in range(0,len(datos["MenuSections"])):
+                for k in range(0,len(datos["MenuSections"][h]["MenuItems"])):
+                    item = datos["MenuSections"][h]["MenuItems"][k]['Name']
+                    if item == itemSelected[j][1]:
+                        if datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"] == []:
+                            if datos["MenuSections"][h]["MenuItems"][k]['Name'] not in actualizados:
+                                actualizados.append(datos["MenuSections"][h]["MenuItems"][k]['Name'])
+                                datos["MenuSections"][h]["MenuItems"][k]['Price'] = float("{0:.2f}".format(price))
+                        else:
+                            for l in range(0,len(datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"])):
+                                if datos["MenuSections"][h]["MenuItems"][k]['Name'] not in actualizados and datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][0]["IsMasterOptionSet"] != True:
+                                    actualizados.append(datos["MenuSections"][h]["MenuItems"][k]['Name'])
+                                    datos["MenuSections"][h]["MenuItems"][k]['Price'] = float("{0:.2f}".format(price))
+                                actualizadosOS.clear()
+                                if (datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["IsMasterOptionSet"] == True and MO == True) or datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["IsMasterOptionSet"] == False and SO == True:
+                                    for m in range(0,len(datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"])):
+                                        if datos["MenuSections"][h]["MenuItems"][k]['Name'] not in actualizadosOS:
+                                            actualizadosOS.append(datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name'])
+                                            datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"] = float("{0:.2f}".format(price))
+
+
+#changes the prices for the selected items by percentaje
+    def slot_changePricePercentajeSelectedOS(self,datos,osSelected,os,price):
+        price = int(price)/100
+        increased_price = float()
+        original_price = float()
+        for j in range(0,len(osSelected)):
+            for h in range(0,len(datos["MenuSections"])):
+                for k in range(0,len(datos["MenuSections"][h]["MenuItems"])):
+                    for l in range(0,len(datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"])):
+                        osName = datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["Name"]
+                        for m in range(0,len(datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'])):
+                            if osSelected[j] == "Change All":
+                                if osName == os[j]:
+                                    #actualizadosOS.append(datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name'])
+                                    new_price = float()
+                                    original_price = 0
+                                    increased_price = 0
+                                    original_price = datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"]
+                                    increased_price = float(original_price) * float(price)
+                                    new_price = float(increased_price) + float(original_price)
+                                    datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"] = float("{0:.2f}".format(new_price))
+                            elif osSelected[j] == datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['Name']:
+                                #actualizadosOS.append(datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name'])
+                                new_price = float()
+                                original_price = 0
+                                increased_price = 0
+                                original_price = datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"]
+                                increased_price = float(original_price) * float(price)
+                                new_price = float(increased_price) + float(original_price)
+                                datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['Price'] = float("{0:.2f}".format(new_price))
+
+
+#changes the prices for the selected OS by Fixed Amount
+    def slot_changePriceFixedAmountSelectedOS(self,datos,osSelected,os,price):
+        original_price = float()
+        for j in range(0,len(osSelected)):
+            for h in range(0,len(datos["MenuSections"])):
+                for k in range(0,len(datos["MenuSections"][h]["MenuItems"])):
+                    for l in range(0,len(datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"])):
+                        osName = datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["Name"]
+                        for m in range(0,len(datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'])):
+                            if osSelected[j] == "Change All":
+                                if osName == os[j]:
+                                    #actualizadosOS.append(datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name'])
+                                    new_price = float()
+                                    original_price = 0
+                                    original_price = datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"]
+                                    new_price = float(price) + float(original_price)
+                                    datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"] = float("{0:.2f}".format(new_price))
+                            elif osSelected[j] == datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['Name']:
+                                #actualizadosOS.append(datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name'])
+                                new_price = float()
+                                original_price = 0
+                                original_price = datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"]
+                                new_price = float(price) + float(original_price)
+                                datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['Price'] = float("{0:.2f}".format(new_price))
+
+##changes the full prices for the selected OS
+    def slot_changePriceSelectedOS(self,datos,osSelected,os,price):
+        for j in range(0,len(osSelected)):
+            for h in range(0,len(datos["MenuSections"])):
+                for k in range(0,len(datos["MenuSections"][h]["MenuItems"])):
+                    for l in range(0,len(datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"])):
+                        osName = datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["Name"]
+                        for m in range(0,len(datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'])):
+                            if osSelected[j] == "Change All":
+                                if osName == os[j]:
+                                    datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"] = float("{0:.2f}".format(price))
+                            elif osSelected[j] == datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['Name']:
+                                datos["MenuSections"][h]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['Price'] = float("{0:.2f}".format(price))
+
+
+#changes the prices by Fixed Amount for the selected items on the Smart Search
+    def slot_changePriceFixedAmountSelectedSS(self,datos,SSitems,text,price,MO,SO):
+        original_price = float()
+        actualizados = list()
+        actualizadosOS = list()
+        for t in range(0,len(text)):
+            for j in range(0,len(SSitems)):
+                for i in range(0,len(datos["MenuSections"])):
+                    for k in range(0,len(datos["MenuSections"][i]["MenuItems"])):
+                        if SSitems[j] == datos["MenuSections"][i]["MenuItems"][k]["Name"]:
+                            if datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"] == []:
+                                original_price = 0
+                                new_price = float()
+                                original_price = datos["MenuSections"][i]["MenuItems"][k]["Price"]
+                                new_price = float(price) + float(original_price)
+                                if datos["MenuSections"][i]["MenuItems"][k]['Name'] not in actualizados:
+                                    actualizados.append(datos["MenuSections"][i]["MenuItems"][k]['Name'])
+                                    datos["MenuSections"][i]["MenuItems"][k]['Price'] = float("{0:.2f}".format(new_price))
+                            else:
+                                for l in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"])):
+                                    original_price = 0
+                                    new_price = float()
+                                    original_price = datos["MenuSections"][i]["MenuItems"][k]["Price"]
+                                    new_price = float(price) + float(original_price)
+                                    if datos["MenuSections"][i]["MenuItems"][k]['Name'] not in actualizados and datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][0]["IsMasterOptionSet"] != True:
+                                        actualizados.append(datos["MenuSections"][i]["MenuItems"][k]['Name'])
+                                        datos["MenuSections"][i]["MenuItems"][k]['Price'] = float("{0:.2f}".format(new_price))
+                                    actualizadosOS.clear()
+                                    if (datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["IsMasterOptionSet"] == True and MO == True) or datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["IsMasterOptionSet"] == False and SO == True:
+                                        for m in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"])):
+                                            if datos["MenuSections"][i]["MenuItems"][k]['Name'] not in actualizadosOS:
+                                                actualizadosOS.append(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name'])
+                                                new_price = float()
+                                                original_price = 0
+                                                original_price = datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"]
+                                                new_price = float(price) + float(original_price)
+                                                datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"] = float("{0:.2f}".format(new_price))
+                        for l in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"])):
+                            for m in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'])):
+                                if SSitems[j] == datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['Name']:
+                                    new_price = float()
+                                    original_price = 0
+                                    original_price = datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"]
+                                    new_price = float(price) + float(original_price)
+                                    datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['Price'] = float("{0:.2f}".format(new_price))
+
+#changes the prices by percentaje for the selected items on the Smart Search
+    def slot_changePricePercentajeSelectedSS(self,datos,SSitems,text,price,MO,SO):
+        original_price = float()
+        price = int(price)/100
+        increased_price = float()
+        actualizados = list()
+        actualizadosOS = list()
+        for t in range(0,len(text)):
+            for j in range(0,len(SSitems)):
+                for i in range(0,len(datos["MenuSections"])):
+                    for k in range(0,len(datos["MenuSections"][i]["MenuItems"])):
+                        if SSitems[j] == datos["MenuSections"][i]["MenuItems"][k]["Name"]:
+                            if datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"] == []:
+                                original_price = 0
+                                increased_price = 0
+                                new_price = float()
+                                original_price = datos["MenuSections"][i]["MenuItems"][k]["Price"]
+                                increased_price = float(original_price) * float(price)
+                                new_price = float(increased_price) + float(original_price)
+                                if datos["MenuSections"][i]["MenuItems"][k]['Name'] not in actualizados:
+                                    actualizados.append(datos["MenuSections"][i]["MenuItems"][k]['Name'])
+                                    datos["MenuSections"][i]["MenuItems"][k]['Price'] = float("{0:.2f}".format(new_price))
+                            else:
+                                for l in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"])):
+                                    original_price = 0
+                                    increased_price = 0
+                                    new_price = float()
+                                    original_price = datos["MenuSections"][i]["MenuItems"][k]["Price"]
+                                    increased_price = float(original_price) * float(price)
+                                    new_price = float(increased_price) + float(original_price)
+                                    if datos["MenuSections"][i]["MenuItems"][k]['Name'] not in actualizados and datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][0]["IsMasterOptionSet"] != True:
+                                        actualizados.append(datos["MenuSections"][i]["MenuItems"][k]['Name'])
+                                        datos["MenuSections"][i]["MenuItems"][k]['Price'] = float("{0:.2f}".format(new_price))
+                                    actualizadosOS.clear()
+                                    if (datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["IsMasterOptionSet"] == True and MO == True) or datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["IsMasterOptionSet"] == False and SO == True:
+                                        for m in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"])):
+                                            if datos["MenuSections"][i]["MenuItems"][k]['Name'] not in actualizadosOS:
+                                                actualizadosOS.append(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name'])
+                                                new_price = float()
+                                                original_price = 0
+                                                increased_price = 0
+                                                original_price = datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"]
+                                                increased_price = float(original_price) * float(price)
+                                                new_price = float(increased_price) + float(original_price)
+                                                datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"] = float("{0:.2f}".format(new_price))
+                        for l in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"])):
+                            for m in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'])):
+                                if SSitems[j] == datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['Name']:
+                                    new_price = float()
+                                    original_price = 0
+                                    increased_price = 0
+                                    original_price = datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"]
+                                    increased_price = float(original_price) * float(price)
+                                    new_price = float(increased_price) + float(original_price)
+                                    datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['Price'] = float("{0:.2f}".format(new_price))
+
+##changes the full prices for the selected items on the Smart Search
+    def slot_changePriceSelectedSelectedSS(self,datos,SSitems,text,price,MO,SO):
+        actualizados = list()
+        actualizadosOS = list()
+        for t in range(0,len(text)):
+            for j in range(0,len(SSitems)):
+                for i in range(0,len(datos["MenuSections"])):
+                    for k in range(0,len(datos["MenuSections"][i]["MenuItems"])):
+                        if SSitems[j] == datos["MenuSections"][i]["MenuItems"][k]["Name"]:
+                            if datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"] == []:
+                                if datos["MenuSections"][i]["MenuItems"][k]['Name'] not in actualizados:
+                                    actualizados.append(datos["MenuSections"][i]["MenuItems"][k]['Name'])
+                                    datos["MenuSections"][i]["MenuItems"][k]['Price'] = float("{0:.2f}".format(price))
+                            else:
+                                for l in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"])):
+                                    if datos["MenuSections"][i]["MenuItems"][k]['Name'] not in actualizados and datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][0]["IsMasterOptionSet"] != True:
+                                        actualizados.append(datos["MenuSections"][i]["MenuItems"][k]['Name'])
+                                        datos["MenuSections"][i]["MenuItems"][k]['Price'] = float("{0:.2f}".format(price))
+                                    actualizadosOS.clear()
+                                    if (datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["IsMasterOptionSet"] == True and MO == True) or datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["IsMasterOptionSet"] == False and SO == True:
+                                        for m in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"])):
+                                            if datos["MenuSections"][i]["MenuItems"][k]['Name'] not in actualizadosOS:
+                                                actualizadosOS.append(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]['Name'])
+                                                datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]["MenuItemOptionSetItems"][m]["Price"] = float("{0:.2f}".format(price))
+                        for l in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"])):
+                            for m in range(0,len(datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'])):
+                                if SSitems[j] == datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['Name']:
+                                    datos["MenuSections"][i]["MenuItems"][k]["MenuItemOptionSets"][l]['MenuItemOptionSetItems'][m]['Price'] = float("{0:.2f}".format(price))
